@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+    //teste2
     public void abrirtela2(View v){
         Intent ittela2 = new Intent(this,Tela2.class);
         startActivity(ittela2);
