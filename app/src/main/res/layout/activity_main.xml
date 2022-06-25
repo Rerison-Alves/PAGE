@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:theme="@style/titulo"
-    tools:context=".FullscreenActivity">
+    tools:context=".MainActivity">
 
   <!-- The primary full-screen view. This can be replaced with whatever view
        is needed to present your content, e.g. VideoView, SurfaceView,
@@ -14,6 +14,7 @@
 
   <!-- This FrameLayout insets its children based on system windows using
        android:fitsSystemWindows. -->
+
 
   <LinearLayout
       android:id="@+id/ly_Inicial"
