@@ -1,31 +1,29 @@
 package com.example.projetopage.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.example.projetopage.Data.Grupo;
 import com.example.projetopage.R;
-import com.example.projetopage.databinding.ActivityMainBinding;
+import com.example.projetopage.Data.Grupo;
+import com.example.projetopage.fragments.adapters.RecyclerViewAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Principal#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class Principal extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -33,15 +31,6 @@ public class Principal extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Principal.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Principal newInstance(String param1, String param2) {
         Principal fragment = new Principal();
         Bundle args = new Bundle();
@@ -59,12 +48,38 @@ public class Principal extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
+    String[] testeGrupos= new String[] {"POO em aplicativos", "POO 2022", "Prog. Linear", "Nome de grupo", "Tô sem ideia"};
+    Context context;
+    RecyclerViewAdapter recyclerViewAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_principal, container, false);
+        View view = inflater.inflate(R.layout.fragment_principal, container, false);
+
+        context= getContext();
+
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.gpsrecentes);
+        RecyclerView.LayoutManager recycleLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(recycleLayoutManager);
+
+        recyclerViewAdapter = new RecyclerViewAdapter(context, testeGrupos);
+        recyclerView.setAdapter(recyclerViewAdapter);
+        return view;
     }
+
+
+
+
+
+
+
+
+
+
+
+
 }

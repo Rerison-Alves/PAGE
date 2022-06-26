@@ -2,6 +2,8 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/</item>
+        <item>@font/imprima</item>
+        <item>@font/inter_bold</item>
         <item>@font/mulish_extralight</item>
     </array>
 </resources>
