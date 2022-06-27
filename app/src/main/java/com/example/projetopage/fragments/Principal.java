@@ -6,18 +6,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.example.projetopage.Data.Grupo;
 import com.example.projetopage.R;
-import com.example.projetopage.Data.Grupo;
 import com.example.projetopage.fragments.adapters.RecyclerViewAdapter;
-
-import java.util.ArrayList;
+import com.example.projetopage.fragments.adapters.RecyclerViewAdapterExtended;
 
 public class Principal extends Fragment {
 
@@ -51,9 +46,12 @@ public class Principal extends Fragment {
 
     }
 
-    String[] testeGrupos= new String[] {"POO em aplicativos", "POO 2022", "Prog. Linear", "Nome de grupo", "Tô sem ideia"};
+    String[] testeRecentes= new String[] {"POO em aplicativos", "POO 2022", "Prog. Linear", "Nome de grupo", "Tô sem ideia"};
+    String[] testeEncontros= new String[] {"Classe Swing", "Ui design"};
+    String[] testeTodos= new  String[] {"POO em aplicativos", "Eletromagnetismo"};
     Context context;
     RecyclerViewAdapter recyclerViewAdapter;
+    RecyclerViewAdapterExtended recyclerViewAdapterExtended;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,13 +59,25 @@ public class Principal extends Fragment {
         View view = inflater.inflate(R.layout.fragment_principal, container, false);
 
         context= getContext();
-
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.gpsrecentes);
-        RecyclerView.LayoutManager recycleLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(recycleLayoutManager);
-
-        recyclerViewAdapter = new RecyclerViewAdapter(context, testeGrupos);
-        recyclerView.setAdapter(recyclerViewAdapter);
+        //Grupos Recentes
+        RecyclerView recentesView = (RecyclerView) view.findViewById(R.id.gpsrecentes);
+        RecyclerView.LayoutManager recycleLayoutRecentes = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        recentesView.setLayoutManager(recycleLayoutRecentes);
+        recyclerViewAdapter = new RecyclerViewAdapter(context, testeRecentes);
+        recentesView.setAdapter(recyclerViewAdapter);
+        //Próximos Encontros
+        RecyclerView encontrosView = (RecyclerView) view.findViewById(R.id.gpsencontros);
+        RecyclerView.LayoutManager recycleLayoutEncontros = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        encontrosView.setLayoutManager(recycleLayoutEncontros);
+        recyclerViewAdapter = new RecyclerViewAdapter(context, testeEncontros);
+        encontrosView.setAdapter(recyclerViewAdapter);
+        //Todos Grupos
+        RecyclerView todosView = (RecyclerView) view.findViewById(R.id.gpstodosgrupos);
+        RecyclerView.LayoutManager recycleLayoutTodos = new LinearLayoutManager(context) ;
+        todosView.setLayoutManager(recycleLayoutTodos);
+        recyclerViewAdapterExtended = new RecyclerViewAdapterExtended(context, testeTodos);
+        todosView.setAdapter(recyclerViewAdapterExtended);
+        todosView.setNestedScrollingEnabled( false );
         return view;
     }
 

@@ -5,6 +5,8 @@
     <string name="page">P A G E</string>
     <string name="bem_vindo">Bem-Vindo ao Page!</string>
     <string name="recentes">Recentes:</string>
+    <string name="proxencontro">Próximos Encontros:</string>
+    <string name="todosgrupos">Todos os grupos e turmas que participa:</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
