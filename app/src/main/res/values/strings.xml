@@ -7,6 +7,12 @@
     <string name="recentes">Recentes:</string>
     <string name="proxencontro">Próximos Encontros:</string>
     <string name="todosgrupos">Todos os grupos e turmas que participa:</string>
+    <string name="areaaluno">Área do Aluno</string>
+    <string name="areaprofessor">Área do Professor</string>
+    <string name="suasturmas">Suas turmas:</string>
+    <string name="seusgrupos">Seus Grupos:</string>
+    <string name="criarnovaturma">+ Criar Turma</string>
+    <string name="criarnovogrupo">+ Criar Grupo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
