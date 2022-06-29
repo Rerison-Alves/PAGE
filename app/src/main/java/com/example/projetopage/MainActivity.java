@@ -1,6 +1,7 @@
 package com.example.projetopage;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,5 +28,10 @@ public class MainActivity extends AppCompatActivity {
     public void abrirtela2(View v){
         Intent ittela2 = new Intent(this,AbaPrincipal.class);
         startActivity(ittela2);
+    }
+
+    static public void bottomsheetdialog(FragmentManager fragmentManager){
+        BottomSheetCriarGrupo bottomSheetCriarGrupo = new BottomSheetCriarGrupo();
+        bottomSheetCriarGrupo.show(fragmentManager,"TAG");
     }
 }

@@ -10,9 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.projetopage.MainActivity;
 import com.example.projetopage.R;
-import com.example.projetopage.fragments.adapters.RecyclerViewAdapter;
 import com.example.projetopage.fragments.adapters.RecyclerViewAdapterExtended;
 
 
@@ -45,6 +46,8 @@ public class Perfil extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
+    Button buttonCriarAgrupamento;
     String[] testeGpsUsuario= new String[] {"POO em aplicativos", "POO 2022", "Prog. Linear", "Nome de grupo", "Tô sem ideia"};
     Context context;
     RecyclerViewAdapterExtended recyclerViewAdapterExtended;
@@ -61,6 +64,15 @@ public class Perfil extends Fragment {
         recyclerViewAdapterExtended = new RecyclerViewAdapterExtended(context, testeGpsUsuario);
         usuariogpsView.setAdapter(recyclerViewAdapterExtended);
         usuariogpsView.setNestedScrollingEnabled( false );
+
+        //BottomSheetDialog
+        buttonCriarAgrupamento =  (Button) view.findViewById(R.id.btn_novoagrupamento);
+        buttonCriarAgrupamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.bottomsheetdialog(getActivity().getSupportFragmentManager());
+            }
+        });
 
         return view;
     }

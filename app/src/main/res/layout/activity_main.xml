@@ -50,6 +50,8 @@
         android:layout_height="100dp"
         android:layout_marginTop="160dp"
         android:text="︽"
+        app:elevation="0dp"
+        android:clickable="false"
         android:textColor="@color/black"
         app:backgroundTint="@color/white" />
   </LinearLayout>
