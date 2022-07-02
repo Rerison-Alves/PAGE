@@ -3,6 +3,7 @@ package com.example.projetopage;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button cima = (Button) findViewById(R.id.btn_cima);
@@ -50,5 +52,10 @@ public class MainActivity extends AppCompatActivity {
     static public void bottomsheetdialog(FragmentManager fragmentManager){
         BottomSheetCriarGrupo bottomSheetCriarGrupo = new BottomSheetCriarGrupo();
         bottomSheetCriarGrupo.show(fragmentManager,"TAG");
+    }
+
+    static public void fragmentdialog(FragmentManager fragmentManager){
+        PopupDialogFragment popupDialogFragment = new PopupDialogFragment();
+        popupDialogFragment.show(fragmentManager, "TAG");
     }
 }

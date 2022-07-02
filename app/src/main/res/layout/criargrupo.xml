@@ -4,8 +4,7 @@
     android:id="@+id/linearlayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:src="@drawable/bottomsheet_shape">
+    android:orientation="vertical">
 
     <ImageView
         android:layout_width="250dp"
@@ -55,6 +54,7 @@
                 <EditText
                     android:id="@+id/nomedogrupo"
                     android:layout_width="match_parent"
+                    android:maxLength="50"
                     android:layout_height="35dp"
                     android:layout_margin="2dp"
                     android:background="#01000000"
@@ -83,6 +83,7 @@
                 <EditText
                     android:id="@+id/areadeestudo"
                     android:layout_width="match_parent"
+                    android:maxLength="50"
                     android:layout_height="35dp"
                     android:layout_margin="2dp"
                     android:background="#01000000"
@@ -167,6 +168,9 @@
                     android:id="@+id/descricao"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="start|top"
+                    android:maxLength="500"
+                    android:lines="6"
                     android:layout_margin="2dp"
                     android:background="#01000000"
                     android:ems="10"
@@ -197,7 +201,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp" />
+                android:layout_height="60dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

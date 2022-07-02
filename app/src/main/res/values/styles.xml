@@ -45,4 +45,8 @@
         <item name="android:background">@drawable/bottomsheet_shape</item>
         <item name="behavior_peekHeight">300dp</item>
     </style>
+
+    <style name="dialogFragment" >
+        <item name="android:background">@drawable/littleborder</item>
+    </style>
 </resources>

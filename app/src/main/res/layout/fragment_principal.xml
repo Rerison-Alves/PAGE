@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:prefix="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.Principal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#F0F0F0">
 
 
     <androidx.core.widget.NestedScrollView

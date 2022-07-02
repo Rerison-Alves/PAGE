@@ -3,6 +3,7 @@ package com.example.projetopage;
 import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -27,5 +28,6 @@ public class AbaPrincipal extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
     }
+
 
 }
