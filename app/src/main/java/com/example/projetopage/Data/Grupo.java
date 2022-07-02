@@ -8,8 +8,8 @@ public class Grupo extends Agrupamento{
     public Grupo() {
     }
 
-    public Grupo(int idAgrupamento, String nome, String descricao, String curso, Usuario[] membros, String areadeEstudo) {
-        super(idAgrupamento, nome, descricao, curso, membros);
+    public Grupo(int idAgrupamento, String nome, String descricao, String curso, String areadeEstudo) {
+        super(idAgrupamento, nome, descricao, curso);
         this.areadeEstudo = areadeEstudo;
     }
 

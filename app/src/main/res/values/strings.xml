@@ -23,4 +23,12 @@
     <string name="descri_o">Descrição:</string>
     <string name="concluir">Concluir</string>
     <string name="ok">Ok</string>
+    <string name="curso">Curso:</string>
+    <string-array name="cursos">
+        <item>Indefinido</item>
+        <item>Ciência da Computação</item>
+        <item>Engenharia Mecânica</item>
+        <item>Química</item>
+    </string-array>
+
 </resources>

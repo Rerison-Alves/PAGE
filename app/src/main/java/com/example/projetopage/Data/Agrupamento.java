@@ -12,20 +12,17 @@ public abstract class Agrupamento {
     public String nome;
     public String descricao;
     public String curso;
-    public Usuario[] membros;
     public ArrayList<Encontro> encontros;
 
 
     public Agrupamento() {
     }
 
-    public Agrupamento(int idAgrupamento, String nome, String descricao, String curso,
-                       Usuario[] membros) {
+    public Agrupamento(int idAgrupamento, String nome, String descricao, String curso) {
         this.idAgrupamento = idAgrupamento;
         this.nome = nome;
         this.curso = curso;
         this.descricao = descricao;
-        this.membros = membros;
     }
 
 //    public void convite(ArrayList<Usuario> membros){
@@ -67,14 +64,6 @@ public abstract class Agrupamento {
 
     public void setCurso(String curso) {
         this.curso = curso;
-    }
-
-    public Usuario[] getMembros() {
-        return membros;
-    }
-
-    public void setMembros(Usuario[] membros) {
-        this.membros = membros;
     }
 
     public ArrayList<Encontro> getEncontros() {

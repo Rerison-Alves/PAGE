@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
         Button cima = (Button) findViewById(R.id.btn_cima);
 
         //teste do banco
-        Grupo POO = new Grupo((int)System.currentTimeMillis(), "POO de amigo", "Alguma coisa legal",
-                "Ciência da comp", null, "Programação");
-        POO.salvar();
+//        Grupo POO = new Grupo((int)System.currentTimeMillis(), "POO de amigo", "Alguma coisa legal",
+//                "Ciência da comp", null, "Programação");
+//        POO.salvar();
         //fim do teste
 
         cima.setOnClickListener(new View.OnClickListener() {

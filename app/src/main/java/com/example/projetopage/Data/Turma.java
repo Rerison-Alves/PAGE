@@ -6,10 +6,10 @@ public class Turma extends Agrupamento{
     String disciplina;
     String Turno;
 
-    public Turma(int idAgrupamento, String nome, String descricao, String curso, Usuario[] membros, String disciplina, String turno) {
-        super(idAgrupamento, nome, descricao, curso, membros);
+    public Turma(int idAgrupamento, String nome, String descricao, String curso, String disciplina, String turno) {
+        super(idAgrupamento, nome, descricao, curso);
         this.disciplina = disciplina;
         if(turno.equals("Manhã") || turno.equals("Tarde") || turno.equals("Noite")) {Turno = turno;}
-        else{Turno="Idefinido";}
+        else{Turno="Indefinido";}
     }
 }
