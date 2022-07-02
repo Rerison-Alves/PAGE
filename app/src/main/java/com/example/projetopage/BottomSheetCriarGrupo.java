@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,7 +39,7 @@ public class BottomSheetCriarGrupo extends BottomSheetDialogFragment {
         btn_convidaalunos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.fragmentdialog(getActivity().getSupportFragmentManager());
+                MainActivity.convidaUsuario(getActivity().getSupportFragmentManager());
             }
         });
         //Spinner
@@ -52,13 +53,16 @@ public class BottomSheetCriarGrupo extends BottomSheetDialogFragment {
         btn_concluir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!nomedogrupo.getText().toString().equals("")&&!areadeestudo.getText().toString().equals("")){
                 Grupo novogrupo = new Grupo((int)System.currentTimeMillis(),
                         nomedogrupo.getText().toString(),
                         descricao.getText().toString(),
                         spinner.getSelectedItem().toString(),
                         areadeestudo.getText().toString());
                 novogrupo.salvar();
-                dismiss();
+                dismiss();}else{
+                    Toast.makeText(getContext(), "Preencha os campos corretamente", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         return view;

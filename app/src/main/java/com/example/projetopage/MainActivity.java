@@ -1,22 +1,19 @@
 package com.example.projetopage;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.projetopage.Data.Agrupamento;
-import com.example.projetopage.Data.Encontro;
-import com.example.projetopage.Data.Grupo;
-import com.example.projetopage.Data.Usuario;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,8 +51,27 @@ public class MainActivity extends AppCompatActivity {
         bottomSheetCriarGrupo.show(fragmentManager,"TAG");
     }
 
-    static public void fragmentdialog(FragmentManager fragmentManager){
-        PopupDialogFragment popupDialogFragment = new PopupDialogFragment();
-        popupDialogFragment.show(fragmentManager, "TAG");
+    static public void convidaUsuario(FragmentManager fragmentManager){
+        PopupDialogConvidaUsuario popupDialogConvidaUsuario = new PopupDialogConvidaUsuario();
+        popupDialogConvidaUsuario.show(fragmentManager, "TAG");
+    }
+
+    static public void deletaGrupo(Agrupamento agrupamento, Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Ao fazer isso seu grupo/turma será excluido permanentemente!").setTitle("Deseja excluir "+ agrupamento.getNome()+ "?");
+        builder.setNegativeButton(R.string.sim, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                agrupamento.remove();
+            }
+        });
+        builder.setPositiveButton(R.string.nao, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
     }
 }

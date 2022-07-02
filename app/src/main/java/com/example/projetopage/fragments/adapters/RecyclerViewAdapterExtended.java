@@ -28,7 +28,7 @@ public class RecyclerViewAdapterExtended extends RecyclerView.Adapter<RecyclerVi
         public TextView textView;
         public ViewHolder(View v){
             super(v);
-            textView = v.findViewById(R.id.textView);
+            textView = v.findViewById(R.id.nomeDoGrupo);
         }
     }
 

@@ -78,4 +78,9 @@ public abstract class Agrupamento {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Agrupamentos").child(String.valueOf(this.getIdAgrupamento())).setValue(this);
     }
+
+    public void remove(){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Agrupamentos").child(String.valueOf(this.getIdAgrupamento())).removeValue();
+    }
 }

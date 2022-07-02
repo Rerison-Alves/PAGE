@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projetopage.Data.Usuario;
 import com.example.projetopage.fragments.adapters.RecyclerViewAdapterExtended;
 
-public class PopupDialogFragment extends DialogFragment {
+public class PopupDialogConvidaUsuario extends DialogFragment {
 
     @Nullable
     @Override

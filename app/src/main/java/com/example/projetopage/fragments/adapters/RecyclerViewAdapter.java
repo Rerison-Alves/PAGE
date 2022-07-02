@@ -1,7 +1,6 @@
 package com.example.projetopage.fragments.adapters;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public TextView textView;
         public ViewHolder(View v){
             super(v);
-            textView = v.findViewById(R.id.textView);
+            textView = v.findViewById(R.id.nomeDoGrupo);
         }
     }
 

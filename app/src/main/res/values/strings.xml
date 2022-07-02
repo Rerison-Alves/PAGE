@@ -24,6 +24,9 @@
     <string name="concluir">Concluir</string>
     <string name="ok">Ok</string>
     <string name="curso">Curso:</string>
+    <string name="area">Área:</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
     <string-array name="cursos">
         <item>Indefinido</item>
         <item>Ciência da Computação</item>
