@@ -8,11 +8,11 @@ import java.util.Collections;
 import java.util.Iterator;
 
 public abstract class Agrupamento {
-    public int idAgrupamento;
-    public String nome;
-    public String descricao;
-    public String curso;
-    public ArrayList<Encontro> encontros;
+    private int idAgrupamento;
+    private String nome;
+    private String descricao;
+    private String curso;
+    private ArrayList<Encontro> encontros;
 
 
     public Agrupamento() {
@@ -24,15 +24,6 @@ public abstract class Agrupamento {
         this.curso = curso;
         this.descricao = descricao;
     }
-
-//    public void convite(ArrayList<Usuario> membros){
-//        Iterator<Usuario> interator = membros.iterator();
-//        while (interator.hasNext()){
-//            Usuario user = interator.next();
-//            this.membros.add(user);
-//            Collections.sort(membros);
-//        }
-//    }
 
     public int getIdAgrupamento() {
         return idAgrupamento;

@@ -11,7 +11,7 @@
     app:cardBackgroundColor="@color/white">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardview"
+        android:id="@+id/consulta"
         android:layout_width="match_parent"
         android:layout_height="95dp"
         app:cardBackgroundColor="@color/white"

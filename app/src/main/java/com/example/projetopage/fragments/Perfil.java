@@ -16,7 +16,7 @@ import android.widget.Button;
 import com.example.projetopage.Data.Grupo;
 import com.example.projetopage.MainActivity;
 import com.example.projetopage.R;
-import com.example.projetopage.fragments.adapters.RecyclerViewAdapterPerfil;
+import com.example.projetopage.adapters.RecyclerViewAdapterPerfil;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,9 +29,7 @@ import java.util.ArrayList;
 
 
 public class Perfil extends Fragment {
-    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference myRef;
-    private ValueEventListener valueEventListener;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -79,7 +77,7 @@ public class Perfil extends Fragment {
         buttonCriarAgrupamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.bottomsheetdialog(getActivity().getSupportFragmentManager());
+                MainActivity.bottomsheetcriargrupo(getActivity().getSupportFragmentManager());
             }
         });
 
@@ -90,7 +88,7 @@ public class Perfil extends Fragment {
         RecyclerView usuariogpsView = (RecyclerView) view.findViewById(R.id.gpsusuario);
         RecyclerView.LayoutManager recycleLayoutUsuario = new LinearLayoutManager(context) ;
         usuariogpsView.setLayoutManager(recycleLayoutUsuario);
-        recyclerViewAdapterPerfil = new RecyclerViewAdapterPerfil(context, ListadeGrupos);
+        recyclerViewAdapterPerfil = new RecyclerViewAdapterPerfil(context, getActivity().getSupportFragmentManager(),ListadeGrupos);
         usuariogpsView.setAdapter(recyclerViewAdapterPerfil);
         usuariogpsView.setNestedScrollingEnabled( false );
     }
@@ -119,4 +117,5 @@ public class Perfil extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference().child("Agrupamentos");
     }
+
 }

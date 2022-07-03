@@ -1,11 +1,9 @@
 package com.example.projetopage;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,9 +12,14 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.projetopage.Data.Agrupamento;
+import com.example.projetopage.Data.Encontro;
+import com.example.projetopage.Data.Grupo;
+import com.example.projetopage.adapters.BottomSheetCriarEncontro;
+import com.example.projetopage.adapters.BottomSheetCriarGrupo;
+import com.example.projetopage.adapters.GrupoDialog;
+import com.example.projetopage.adapters.PopupDialogConvidaUsuario;
 
 public class MainActivity extends AppCompatActivity {
-
 
 
     @Override
@@ -46,14 +49,25 @@ public class MainActivity extends AppCompatActivity {
         startActivity(ittela2);
     }
 
-    static public void bottomsheetdialog(FragmentManager fragmentManager){
+    static public void bottomsheetcriargrupo(FragmentManager fragmentManager){
         BottomSheetCriarGrupo bottomSheetCriarGrupo = new BottomSheetCriarGrupo();
         bottomSheetCriarGrupo.show(fragmentManager,"TAG");
     }
-
+    static public void bottomsheetcriarencontro(FragmentManager fragmentManager, int idAgrupamento){
+        BottomSheetCriarEncontro bottomSheetCriarEncontro = new BottomSheetCriarEncontro();
+        bottomSheetCriarEncontro.show(fragmentManager,"TAG", idAgrupamento);
+    }
     static public void convidaUsuario(FragmentManager fragmentManager){
         PopupDialogConvidaUsuario popupDialogConvidaUsuario = new PopupDialogConvidaUsuario();
         popupDialogConvidaUsuario.show(fragmentManager, "TAG");
+    }
+
+    static public void consultaGrupo(Grupo grupo, Context context, FragmentManager fragmentManager){
+        GrupoDialog dialog = new GrupoDialog(grupo, context, fragmentManager, R.style.Theme_ProjetoPAGE);
+        dialog.show();
+    }
+    static public void consultaEncontro(Encontro encontro, Context context){
+
     }
 
     static public void deletaGrupo(Agrupamento agrupamento, Context context){
@@ -62,6 +76,24 @@ public class MainActivity extends AppCompatActivity {
         builder.setNegativeButton(R.string.sim, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 agrupamento.remove();
+            }
+        });
+        builder.setPositiveButton(R.string.nao, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+    static public void deletaEncontro(Encontro encontro, Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Ao fazer isso seu encontro será excluido permanentemente!").setTitle("Deseja excluir "+ encontro.getNome()+ "?");
+        builder.setNegativeButton(R.string.sim, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                encontro.remove();
             }
         });
         builder.setPositiveButton(R.string.nao, new DialogInterface.OnClickListener() {

@@ -1,4 +1,4 @@
-package com.example.projetopage.fragments.adapters;
+package com.example.projetopage.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,14 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projetopage.R;
 
-public class RecyclerViewAdapterExtended extends RecyclerView.Adapter<RecyclerViewAdapterExtended.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     String[] valores;
     Context context;
     View view;
     ViewHolder viewHolder;
     TextView textView;
 
-    public RecyclerViewAdapterExtended(Context context2, String[] valores2){
+    public RecyclerViewAdapter(Context context2, String[] valores2){
 
         valores=valores2;
         context=context2;
@@ -32,8 +32,8 @@ public class RecyclerViewAdapterExtended extends RecyclerView.Adapter<RecyclerVi
         }
     }
 
-    public RecyclerViewAdapterExtended.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-    view = LayoutInflater.from(context).inflate(R.layout.card_grupos_extended, parent, false);
+    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    view = LayoutInflater.from(context).inflate(R.layout.card_grupos, parent, false);
     viewHolder = new ViewHolder(view);
     return viewHolder;
     }

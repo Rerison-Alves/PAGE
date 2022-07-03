@@ -1,18 +1,16 @@
-package com.example.projetopage.fragments.adapters;
+package com.example.projetopage.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projetopage.Data.Agrupamento;
 import com.example.projetopage.Data.Grupo;
 import com.example.projetopage.MainActivity;
 import com.example.projetopage.R;
@@ -20,27 +18,30 @@ import com.example.projetopage.R;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapterPerfil extends RecyclerView.Adapter<RecyclerViewAdapterPerfil.ViewHolder> {
-    ArrayList<Grupo> agrupamentos;
+    ArrayList<Grupo> grupos;
     Context context;
     View view;
     ViewHolder viewHolder;
-    TextView nomedogrupo, areadogrupo;
+    FragmentManager fragmentManager;
 
-    public RecyclerViewAdapterPerfil(Context context, ArrayList<Grupo> agrupamentos){
-        this.agrupamentos=agrupamentos;
+    public RecyclerViewAdapterPerfil(Context context, FragmentManager fragmentManager,ArrayList<Grupo> grupos){
+        this.grupos = grupos;
         this.context=context;
+        this.fragmentManager=fragmentManager;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView nomedogrupo, areadogrupo;
         public ImageButton edit, excluir;
+        public FrameLayout consulta;
         public ViewHolder(View v){
             super(v);
             nomedogrupo = v.findViewById(R.id.nomeDoGrupo);
             areadogrupo = v.findViewById(R.id.areadogrupo);
             edit = v.findViewById(R.id.edit);
             excluir= v.findViewById(R.id.excluir);
+            consulta=v.findViewById(R.id.consulta);
         }
     }
 
@@ -51,18 +52,24 @@ public class RecyclerViewAdapterPerfil extends RecyclerView.Adapter<RecyclerView
     }
 
     public void onBindViewHolder(ViewHolder holder, int position){
-        holder.nomedogrupo.setText(agrupamentos.get(position).getNome());
-        holder.areadogrupo.setText(agrupamentos.get(position).getAreadeEstudo());
+        holder.nomedogrupo.setText(grupos.get(position).getNome());
+        holder.areadogrupo.setText(grupos.get(position).getAreadeEstudo());
+        holder.consulta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.consultaGrupo(grupos.get(position), context, fragmentManager);
+            }
+        });
         holder.excluir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.deletaGrupo(agrupamentos.get(position), context);
+                MainActivity.deletaGrupo(grupos.get(position), context);
             }
         });
 
     }
 
     public int getItemCount(){
-        return agrupamentos.size();
+        return grupos.size();
     }
 }

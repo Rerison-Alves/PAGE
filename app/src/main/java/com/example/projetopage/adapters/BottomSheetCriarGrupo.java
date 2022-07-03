@@ -1,4 +1,4 @@
-package com.example.projetopage;
+package com.example.projetopage.adapters;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +15,8 @@ import androidx.annotation.Nullable;
 
 import com.example.projetopage.Data.Grupo;
 import com.example.projetopage.Data.Usuario;
+import com.example.projetopage.MainActivity;
+import com.example.projetopage.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class BottomSheetCriarGrupo extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.criargrupo, container, false);
-        nomedogrupo = (EditText) view.findViewById(R.id.nomedogrupo);
+        nomedogrupo = (EditText) view.findViewById(R.id.temadoEncontro);
         areadeestudo = (EditText) view.findViewById(R.id.areadeestudo);
         descricao = (EditText) view.findViewById(R.id.descricao);
         btn_convidaalunos= (FrameLayout) view.findViewById(R.id.btn_convidaalunos);

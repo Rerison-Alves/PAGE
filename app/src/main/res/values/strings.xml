@@ -27,6 +27,19 @@
     <string name="area">Área:</string>
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
+    <string name="administrador">Administrador:</string>
+    <string name="descricao">Descrição:</string>
+    <string name="pr_ximos_encontros">Próximos encontros:</string>
+    <string name="novo_encontro">+Novo Encontro</string>
+    <string name="digite_uma_descri_o">Digite uma descrição...</string>
+    <string name="data">Data*:</string>
+    <string name="local">Local:</string>
+    <string name="criar_encontro">Criar Encontro</string>
+    <string name="tema_do_encontro">Tema do Encontro*:</string>
+    <string name="in_cio">Início</string>
+    <string name="fim">Fim</string>
+    <string name="selecionar_local_dispon_vel">Selecionar Local Disponível</string>
+    <string name="dataset">Data:</string>
     <string-array name="cursos">
         <item>Indefinido</item>
         <item>Ciência da Computação</item>

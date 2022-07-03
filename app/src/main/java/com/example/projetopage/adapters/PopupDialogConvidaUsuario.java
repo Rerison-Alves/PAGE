@@ -1,4 +1,4 @@
-package com.example.projetopage;
+package com.example.projetopage.adapters;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,8 +15,9 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projetopage.Data.Usuario;
-import com.example.projetopage.fragments.adapters.RecyclerViewAdapterExtended;
+import com.example.projetopage.MainActivity;
+import com.example.projetopage.R;
+import com.example.projetopage.adapters.RecyclerViewAdapterExtended;
 
 public class PopupDialogConvidaUsuario extends DialogFragment {
 

@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.projetopage.R;
-import com.example.projetopage.fragments.adapters.RecyclerViewAdapter;
-import com.example.projetopage.fragments.adapters.RecyclerViewAdapterExtended;
+import com.example.projetopage.adapters.RecyclerViewAdapter;
+import com.example.projetopage.adapters.RecyclerViewAdapterExtended;
 
 public class Principal extends Fragment {
 
