@@ -77,7 +77,7 @@ public class Perfil extends Fragment {
         buttonCriarAgrupamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.bottomsheetcriargrupo(getActivity().getSupportFragmentManager());
+                MainActivity.bottomsheetcriargrupo(getParentFragmentManager());
             }
         });
 
@@ -88,7 +88,7 @@ public class Perfil extends Fragment {
         RecyclerView usuariogpsView = (RecyclerView) view.findViewById(R.id.gpsusuario);
         RecyclerView.LayoutManager recycleLayoutUsuario = new LinearLayoutManager(context) ;
         usuariogpsView.setLayoutManager(recycleLayoutUsuario);
-        recyclerViewAdapterPerfil = new RecyclerViewAdapterPerfil(context, getActivity().getSupportFragmentManager(),ListadeGrupos);
+        recyclerViewAdapterPerfil = new RecyclerViewAdapterPerfil(context, getParentFragmentManager() ,ListadeGrupos);
         usuariogpsView.setAdapter(recyclerViewAdapterPerfil);
         usuariogpsView.setNestedScrollingEnabled( false );
     }

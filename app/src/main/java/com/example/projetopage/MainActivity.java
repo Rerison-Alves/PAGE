@@ -24,6 +24,8 @@ import android.widget.TextView;
 import com.example.projetopage.Data.Agrupamento;
 import com.example.projetopage.Data.Encontro;
 import com.example.projetopage.Data.Grupo;
+import com.example.projetopage.adapters.BottomSheetCadastro;
+import com.example.projetopage.adapters.BottomSheetCadastroAluno;
 import com.example.projetopage.adapters.BottomSheetCriarEncontro;
 import com.example.projetopage.adapters.BottomSheetCriarGrupo;
 import com.example.projetopage.adapters.GrupoDialog;
@@ -60,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 case MotionEvent.ACTION_UP:
                 {
-                    abrirtela2(v);
+//                    abrirtela2(v);
+                    bottomsheetcadastro();
                     par.topMargin+=(int)event.getRawY()-prevY;
                     v.setLayoutParams(par);
                     return true;
@@ -83,6 +86,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(ittela2);
     }
 
+    public void bottomsheetcadastro(){
+        BottomSheetCadastro bottomSheetCadastro = new BottomSheetCadastro();
+        bottomSheetCadastro.show(getSupportFragmentManager(), "TAG");
+    }
+    static public void cadastroaluno(FragmentManager fragmentManager){
+        BottomSheetCadastroAluno bottomSheetCadastroAluno = new BottomSheetCadastroAluno();
+        bottomSheetCadastroAluno.show(fragmentManager, "TAG");
+    }
     static public void bottomsheetcriargrupo(FragmentManager fragmentManager){
         BottomSheetCriarGrupo bottomSheetCriarGrupo = new BottomSheetCriarGrupo();
         bottomSheetCriarGrupo.show(fragmentManager,"TAG");

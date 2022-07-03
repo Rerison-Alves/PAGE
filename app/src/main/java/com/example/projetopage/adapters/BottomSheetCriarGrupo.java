@@ -29,7 +29,6 @@ public class BottomSheetCriarGrupo extends BottomSheetDialogFragment {
     ArrayList<Usuario> listadeconvidados;
     FrameLayout btn_convidaalunos, btn_concluir;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,7 +40,7 @@ public class BottomSheetCriarGrupo extends BottomSheetDialogFragment {
         btn_convidaalunos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.convidaUsuario(getActivity().getSupportFragmentManager());
+                MainActivity.convidaUsuario(getParentFragmentManager());
             }
         });
         //Spinner

@@ -74,7 +74,7 @@ public class BottomSheetCriarEncontro extends BottomSheetDialogFragment {
                     Date datateste= null;
                     @SuppressLint("SimpleDateFormat") SimpleDateFormat formata = new SimpleDateFormat("HH:mm dd/MM/yyyy");
                     try {
-                        datateste=formata.parse(inicio.getText().toString()+" "+data.getText().toString());
+                        datateste=formata.parse(inicio.getText()+" "+data.getText().toString());
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
