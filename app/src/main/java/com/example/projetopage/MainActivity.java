@@ -3,13 +3,23 @@ package com.example.projetopage;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.projetopage.Data.Agrupamento;
 import com.example.projetopage.Data.Encontro;
@@ -22,26 +32,50 @@ import com.example.projetopage.adapters.PopupDialogConvidaUsuario;
 public class MainActivity extends AppCompatActivity {
 
 
+    private ViewGroup rootLayout;
+    int prevX,prevY;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button cima = (Button) findViewById(R.id.btn_cima);
+        ImageView cima = (ImageView) findViewById(R.id.btn_cima);
 
-        //teste do banco
-//        Grupo POO = new Grupo((int)System.currentTimeMillis(), "POO de amigo", "Alguma coisa legal",
-//                "Ciência da comp", null, "Programação");
-//        POO.salvar();
-        //fim do teste
+        cima.setOnTouchListener(new ChoiceTouchListener());
 
-        cima.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                abrirtela2(view);
+    }
+    private final class ChoiceTouchListener implements View.OnTouchListener {
+        public boolean onTouch(final View v,final MotionEvent event)
+        {
+            final FrameLayout.LayoutParams par=(FrameLayout.LayoutParams)v.getLayoutParams();
+            switch(event.getAction())
+            {
+                case MotionEvent.ACTION_MOVE:
+                {
+                    prevY=(int)event.getRawY();
+                    prevX=(int)event.getRawX();
+                    v.setLayoutParams(par);
+                    par.topMargin+=(int)event.getRawY()-prevY;
+                    return true;
+                }
+                case MotionEvent.ACTION_UP:
+                {
+                    abrirtela2(v);
+                    par.topMargin+=(int)event.getRawY()-prevY;
+                    v.setLayoutParams(par);
+                    return true;
+                }
+                case MotionEvent.ACTION_DOWN:
+                {
+                    prevX=(int)event.getRawX();
+                    prevY=(int)event.getRawY();
+                    par.bottomMargin=v.getHeight();
+                    v.setLayoutParams(par);
+                    return true;
+                }
             }
-        });
-
+            return false;
+        }
     }
     //teste2
     public void abrirtela2(View v){

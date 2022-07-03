@@ -9,15 +9,13 @@
     android:gravity="center|top"
     app:cardBackgroundColor="@color/white">
 
-    <androidx.cardview.widget.CardView
+    <FrameLayout
         android:id="@+id/consulta"
         android:layout_width="115dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
         android:layout_margin="5dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="10dp"
+        android:background="@drawable/border"
         android:paddingBottom="20dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
@@ -33,5 +31,5 @@
             android:gravity="center|top"
             android:text="@string/app_name"
             android:textSize="20sp" />
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
 </FrameLayout>

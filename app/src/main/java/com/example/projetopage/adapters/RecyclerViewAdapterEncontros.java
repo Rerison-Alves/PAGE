@@ -55,8 +55,7 @@ public class RecyclerViewAdapterEncontros extends RecyclerView.Adapter<RecyclerV
         holder.consulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Encontro encontro = new Encontro();
-//                MainActivity.consultaEncontro(encontro,context);
+
             }
         });
         holder.excluir.setOnClickListener(new View.OnClickListener() {

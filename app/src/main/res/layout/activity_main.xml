@@ -8,20 +8,12 @@
     android:theme="@style/titulo"
     tools:context=".MainActivity">
 
-  <!-- The primary full-screen view. This can be replaced with whatever view
-       is needed to present your content, e.g. VideoView, SurfaceView,
-       TextureView, etc. -->
-
-  <!-- This FrameLayout insets its children based on system windows using
-       android:fitsSystemWindows. -->
-
-
   <LinearLayout
       android:id="@+id/ly_Inicial"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:baselineAligned="false"
-      android:gravity="center"
+      android:gravity="center|top"
       android:orientation="vertical">
 
     <ImageView
@@ -44,16 +36,18 @@
         android:textSize="50sp"
         android:theme="@style/titulo" />
 
-    <Button
+  </LinearLayout>
+
+
+    <ImageView
         android:id="@+id/btn_cima"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="160dp"
-        android:text="︽"
-        app:elevation="0dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="40dp"
         android:clickable="false"
         android:textColor="@color/black"
-        app:backgroundTint="@color/white" />
-  </LinearLayout>
+        app:elevation="5dp"
+        app:srcCompat="@drawable/_13431_arrows_512x512" />
 
 </FrameLayout>
