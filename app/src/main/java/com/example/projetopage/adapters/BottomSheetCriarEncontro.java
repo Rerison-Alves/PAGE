@@ -15,14 +15,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.projetopage.Data.Encontro;
-import com.example.projetopage.Data.Usuario;
-import com.example.projetopage.MainActivity;
 import com.example.projetopage.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import br.com.sapereaude.maskedEditText.MaskedEditText;
@@ -45,7 +42,7 @@ public class BottomSheetCriarEncontro extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.criarencontro, container, false);
         Context context = getContext();
-        temaDoEncontro = (EditText) view.findViewById(R.id.temadoEncontro);
+        temaDoEncontro = (EditText) view.findViewById(R.id.nomealuno);
         data = (EditText) view.findViewById(R.id.data);
         inicio = (MaskedEditText) view.findViewById(R.id.datainicio);
         fim = (MaskedEditText) view.findViewById(R.id.datafim);

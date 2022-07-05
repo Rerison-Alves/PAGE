@@ -28,6 +28,7 @@ import com.example.projetopage.adapters.BottomSheetCadastro;
 import com.example.projetopage.adapters.BottomSheetCadastroAluno;
 import com.example.projetopage.adapters.BottomSheetCriarEncontro;
 import com.example.projetopage.adapters.BottomSheetCriarGrupo;
+import com.example.projetopage.adapters.BottomSheetLoginAluno;
 import com.example.projetopage.adapters.GrupoDialog;
 import com.example.projetopage.adapters.PopupDialogConvidaUsuario;
 
@@ -80,11 +81,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     }
-    //teste2
-    public void abrirtela2(View v){
-        Intent ittela2 = new Intent(this,AbaPrincipal.class);
-        startActivity(ittela2);
-    }
 
     public void bottomsheetcadastro(){
         BottomSheetCadastro bottomSheetCadastro = new BottomSheetCadastro();
@@ -93,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
     static public void cadastroaluno(FragmentManager fragmentManager){
         BottomSheetCadastroAluno bottomSheetCadastroAluno = new BottomSheetCadastroAluno();
         bottomSheetCadastroAluno.show(fragmentManager, "TAG");
+    }
+    static public void loginaluno(FragmentManager fragmentManager){
+        BottomSheetLoginAluno bottomSheetLoginAluno = new BottomSheetLoginAluno();
+        bottomSheetLoginAluno.show(fragmentManager, "TAG");
     }
     static public void bottomsheetcriargrupo(FragmentManager fragmentManager){
         BottomSheetCriarGrupo bottomSheetCriarGrupo = new BottomSheetCriarGrupo();

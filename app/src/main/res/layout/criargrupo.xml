@@ -52,7 +52,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/temadoEncontro"
+                    android:id="@+id/nomealuno"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_margin="2dp"
@@ -189,7 +189,7 @@
                     android:scrollbars="vertical">
                 <EditText
                     android:id="@+id/descricao"
-                    android:text="@string/digite_uma_descri_o"
+                    android:hint="@string/digite_uma_descri_o"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="start|top"

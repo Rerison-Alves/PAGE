@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragmentcadastroaluno"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="5dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/barra" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -16,21 +24,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="5dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/barra" />
-    <TextView
-        style="@style/textonormal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:gravity="start"
-        android:text="@string/nome_do_grupo"
-        android:textSize="24sp" />
+            <TextView
+                android:id="@+id/textView7"
+                style="@style/textonormal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@string/cadastro_aluno"
+                android:textSize="24sp" />
+            <TextView
+                style="@style/textonormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:gravity="start"
+                android:text="@string/nome"
+                android:textSize="24sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,23 +51,25 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/temadoEncontro"
+            android:id="@+id/nomealuno"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_margin="2dp"
             android:background="#01000000"
             android:ems="10"
             android:inputType="text"
-            android:maxLength="50" />
+            android:maxLength="50"
+            android:autofillHints="" />
     </LinearLayout>
-    <TextView
-        style="@style/textonormal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:gravity="start"
-        android:text="@string/nome_do_grupo"
-        android:textSize="24sp" />
+
+            <TextView
+                style="@style/textonormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:gravity="start"
+                android:text="@string/email"
+                android:textSize="24sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,23 +79,24 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/temadoEncontro"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_margin="2dp"
             android:background="#01000000"
             android:ems="10"
-            android:inputType="text"
+            android:inputType="textEmailAddress"
             android:maxLength="50" />
     </LinearLayout>
-    <TextView
-        style="@style/textonormal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:gravity="start"
-        android:text="@string/nome_do_grupo"
-        android:textSize="24sp" />
+
+            <TextView
+                style="@style/textonormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:gravity="start"
+                android:text="@string/matr_cula"
+                android:textSize="24sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -92,94 +106,136 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/temadoEncontro"
+            android:id="@+id/matricula"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_margin="2dp"
             android:background="#01000000"
             android:ems="10"
-            android:inputType="text"
-            android:maxLength="50" />
+            android:inputType="number"
+            android:maxLength="14" />
     </LinearLayout>
-    <TextView
-        style="@style/textonormal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:gravity="start"
-        android:text="@string/nome_do_grupo"
-        android:textSize="24sp" />
+
+            <TextView
+                style="@style/textonormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:gravity="start"
+                android:text="@string/curso_"
+                android:textSize="24sp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="180dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/spiner">
+                <Spinner
+                    android:id="@+id/curso"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+            </FrameLayout>
+
+            <TextView
+                style="@style/textonormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:gravity="start"
+                android:text="@string/data_de_nascimento"
+                android:textSize="24sp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="140dp"
         android:layout_height="40dp"
         android:layout_margin="20dp"
         android:background="@drawable/border"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/temadoEncontro"
+        <br.com.sapereaude.maskedEditText.MaskedEditText
+            android:id="@+id/datanasc"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_margin="2dp"
             android:background="#01000000"
+            android:gravity="center"
             android:ems="10"
+            app:mask="##/##/####"
             android:inputType="text"
-            android:maxLength="50" />
+            android:maxLength="10" />
     </LinearLayout>
-    <TextView
-        style="@style/textonormal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:gravity="start"
-        android:text="@string/nome_do_grupo"
-        android:textSize="24sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/border"
-        android:orientation="vertical">
+            <TextView
 
-        <EditText
-            android:id="@+id/temadoEncontro"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_margin="2dp"
-            android:background="#01000000"
-            android:ems="10"
-            android:inputType="text"
-            android:maxLength="50" />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/textView8"
-        style="@style/textonormal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:gravity="start"
-        android:text="@string/nome_do_grupo"
-        android:textSize="24sp" />
+                style="@style/textonormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:gravity="start"
+                android:text="@string/senha"
+                android:textSize="24sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/border"
-        android:orientation="vertical">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="20dp"
+                android:gravity="top"
+                android:background="@drawable/border">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    app:passwordToggleEnabled="true"
+                    app:hintEnabled="false"
+                    app:passwordToggleTint="@color/black">
+                <EditText
+                    android:id="@+id/senha"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="#01000000"
+                    android:ems="10"
+                    android:layout_margin="2dp"
+                    android:inputType="textPassword"
+                    android:maxLength="20" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/temadoEncontro"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_margin="2dp"
-            android:background="#01000000"
-            android:ems="10"
-            android:inputType="text"
-            android:maxLength="50" />
-    </LinearLayout>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/textView8"
+                style="@style/textonormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:gravity="start"
+                android:text="@string/digite_a_senha_novamente"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/border">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    app:passwordToggleEnabled="true"
+                    app:hintEnabled="false"
+                    app:passwordToggleTint="@color/black">
+                <EditText
+                    android:id="@+id/repetesenha"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_margin="2dp"
+                    android:background="#01000000"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:maxLength="20" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
             <FrameLayout
                 android:id="@+id/btn_concluir"
                 android:layout_width="160dp"
@@ -200,6 +256,9 @@
                     android:text="@string/concluir"
                     android:textSize="16sp" />
             </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

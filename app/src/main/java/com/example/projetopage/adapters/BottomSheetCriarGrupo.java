@@ -33,7 +33,7 @@ public class BottomSheetCriarGrupo extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.criargrupo, container, false);
-        nomedogrupo = (EditText) view.findViewById(R.id.temadoEncontro);
+        nomedogrupo = (EditText) view.findViewById(R.id.nomealuno);
         areadeestudo = (EditText) view.findViewById(R.id.areadeestudo);
         descricao = (EditText) view.findViewById(R.id.descricao);
         btn_convidaalunos= (FrameLayout) view.findViewById(R.id.btn_convidaalunos);

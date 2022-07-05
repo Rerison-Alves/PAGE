@@ -17,7 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 public class BottomSheetCadastro extends BottomSheetDialogFragment {
 
     @Nullable
-    FrameLayout btn_cadastroaluno;
+    FrameLayout btn_cadastroaluno, btn_loginaluno;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bottomsheetinicial, container, false);
         btn_cadastroaluno = (FrameLayout) view.findViewById(R.id.btn_cadastroaluno);
@@ -26,6 +26,14 @@ public class BottomSheetCadastro extends BottomSheetDialogFragment {
             public void onClick(View view) {
                 dismiss();
                 MainActivity.cadastroaluno(getParentFragmentManager());
+            }
+        });
+        btn_loginaluno = (FrameLayout) view.findViewById(R.id.btn_loginaluno);
+        btn_loginaluno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+                MainActivity.loginaluno(getParentFragmentManager());
             }
         });
         return view;

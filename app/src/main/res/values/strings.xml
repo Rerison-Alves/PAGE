@@ -40,6 +40,17 @@
     <string name="fim">Fim</string>
     <string name="selecionar_local_dispon_vel">Selecionar Local Disponível</string>
     <string name="dataset">Data:</string>
+    <string name="esqueci_minha_senha">Esqueci minha senha</string>
+    <string name="n_o_tenho_uma_conta">Não tenho uma conta</string>
+    <string name="senha">Senha*:</string>
+    <string name="email">Email*:</string>
+    <string name="login_aluno">Login Aluno</string>
+    <string name="cadastro_aluno">Cadastro Aluno</string>
+    <string name="nome">Nome*:</string>
+    <string name="matr_cula">Matrícula*:</string>
+    <string name="curso_">Curso*:</string>
+    <string name="data_de_nascimento">Data de Nascimento*:</string>
+    <string name="digite_a_senha_novamente">Digite a senha novamente*:</string>
     <string-array name="cursos">
         <item>Indefinido</item>
         <item>Ciência da Computação</item>
