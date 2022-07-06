@@ -50,7 +50,7 @@ public class RecyclerViewAdapterEncontros extends RecyclerView.Adapter<RecyclerV
     }
 
     public void onBindViewHolder(ViewHolder holder, int position){
-        holder.nomeDoEncontro.setText(encontros.get(position).getNome());
+        holder.nomeDoEncontro.setText(encontros.get(position).getTema());
 //        holder.data.setText(encontros.get(position).getAreadeEstudo());
         holder.consulta.setOnClickListener(new View.OnClickListener() {
             @Override

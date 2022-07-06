@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 public abstract class Agrupamento {
-    private int idAgrupamento;
+    private String idAgrupamento;
     private String nome;
     private String descricao;
     private String curso;
@@ -18,18 +18,18 @@ public abstract class Agrupamento {
     public Agrupamento() {
     }
 
-    public Agrupamento(int idAgrupamento, String nome, String descricao, String curso) {
+    public Agrupamento(String idAgrupamento, String nome, String descricao, String curso) {
         this.idAgrupamento = idAgrupamento;
         this.nome = nome;
         this.curso = curso;
         this.descricao = descricao;
     }
 
-    public int getIdAgrupamento() {
+    public String getIdAgrupamento() {
         return idAgrupamento;
     }
 
-    public void setIdAgrupamento(int idAgrupamento) {
+    public void setIdAgrupamento(String idAgrupamento) {
         this.idAgrupamento = idAgrupamento;
     }
 

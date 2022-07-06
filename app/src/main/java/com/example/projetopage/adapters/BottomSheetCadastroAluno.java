@@ -29,6 +29,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -79,7 +80,6 @@ public class BottomSheetCadastroAluno extends BottomSheetDialogFragment {
                     Aluno aluno = new Aluno(
                             nome.getText().toString(),
                             email.getText().toString(),
-                            senha.getText().toString(),
                             data,
                             curso.getSelectedItem().toString(),
                             matricula.getText().toString());
@@ -93,18 +93,38 @@ public class BottomSheetCadastroAluno extends BottomSheetDialogFragment {
     private void cadastrarAluno(Aluno aluno){
         autenticacao = ConfiguraBd.Firebaseautenticacao();
         autenticacao.createUserWithEmailAndPassword(
-                aluno.getEmail(), aluno.getSenha()
+                aluno.getEmail(), senha.getText().toString()
         ).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(getContext(), "Sua conta foi cadastrada!", Toast.LENGTH_LONG).show();
-                    dismiss();
-                    MainActivity.loginaluno(getParentFragmentManager());
-                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                    FirebaseUser firebaseUser = UsuarioAutenticado.UsuarioLogado();
-                    aluno.setIdAluno(firebaseUser.getUid());
-                    mDatabase.child("Usuario").child(firebaseUser.getUid()).setValue(aluno);
+                    FirebaseUser user = UsuarioAutenticado.UsuarioLogado();
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(aluno.getNome())
+                            .build();
+                    user.updateProfile(profileUpdates)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()){
+                                                    dismiss();
+                                                    MainActivity.loginaluno(getParentFragmentManager());
+                                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                                    aluno.setIdAluno(user.getUid());
+                                                    mDatabase.child("Usuario").child(user.getUid()).setValue(aluno);
+                                                    Toast.makeText(getContext(), "Sua conta foi cadastrada!\nVerifique seu email!", Toast.LENGTH_LONG).show();
+                                                }else {
+                                                    Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+                            });
                 }else {
                     String excessao="";
                     try {

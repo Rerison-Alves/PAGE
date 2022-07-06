@@ -4,16 +4,15 @@ package com.example.projetopage.Data;
 import java.util.Date;
 
 public abstract class Usuario {
-    private String nome, email, senha;
+    private String nome, email;
     private Date datanasc;
 
     public Usuario() {
     }
 
-    public Usuario(String nome, String email, String senha, Date datanasc) {
+    public Usuario(String nome, String email, Date datanasc) {
         this.nome = nome;
         this.email = email;
-        this.senha = senha;
         this.datanasc = datanasc;
     }
 
@@ -31,14 +30,6 @@ public abstract class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public Date getDatanasc() {

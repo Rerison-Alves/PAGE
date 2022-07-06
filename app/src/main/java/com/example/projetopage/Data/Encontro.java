@@ -4,14 +4,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Encontro {
-    private int idEncontro, idAgrupamento;
+    private String idEncontro, idAgrupamento;
     private String tema;
     private String descricao;
 
     public Encontro() {
     }
 
-    public Encontro(int idEncontro, String tema, int idAgrupamento, String descricao) {
+    public Encontro(String idEncontro, String tema, String idAgrupamento, String descricao) {
         this.idEncontro = idEncontro;
         this.tema = tema;
         this.idAgrupamento=idAgrupamento;
@@ -19,27 +19,27 @@ public class Encontro {
 
     }
 
-    public int getIdEncontro() {
+    public String getIdEncontro() {
         return idEncontro;
     }
 
-    public void setIdEncontro(int idEncontro) {
+    public void setIdEncontro(String idEncontro) {
         this.idEncontro = idEncontro;
     }
 
-    public String getNome() {
+    public String getTema() {
         return tema;
     }
 
-    public void setNome(String nome) {
-        this.tema = nome;
+    public void setNome(String tema) {
+        this.tema = tema;
     }
 
-    public int getIdAgrupamento() {
+    public String getIdAgrupamento() {
         return idAgrupamento;
     }
 
-    public void setIdAgrupamento(int idAgrupamento) {
+    public void setIdAgrupamento(String idAgrupamento) {
         this.idAgrupamento = idAgrupamento;
     }
 

@@ -4,12 +4,11 @@ import java.util.Date;
 
 public class Aluno extends Usuario{
     private String idAluno, curso, matricula;
-
     public Aluno() {
     }
 
-    public Aluno(String nome, String email, String senha, Date datanasc, String curso, String matricula) {
-        super(nome, email, senha, datanasc);
+    public Aluno(String nome, String email, Date datanasc, String curso, String matricula) {
+        super(nome, email, datanasc);
         this.curso = curso;
         this.matricula = matricula;
     }

@@ -55,7 +55,8 @@ public class BottomSheetCriarGrupo extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 if(!nomedogrupo.getText().toString().equals("")&&!areadeestudo.getText().toString().equals("")){
-                Grupo novogrupo = new Grupo((int)System.currentTimeMillis(),
+                Grupo novogrupo = new Grupo(
+                        MainActivity.genUUI(),
                         nomedogrupo.getText().toString(),
                         descricao.getText().toString(),
                         spinner.getSelectedItem().toString(),

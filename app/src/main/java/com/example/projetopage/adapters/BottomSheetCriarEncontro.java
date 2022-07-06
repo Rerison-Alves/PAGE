@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.projetopage.Data.Encontro;
+import com.example.projetopage.MainActivity;
 import com.example.projetopage.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -30,9 +31,9 @@ public class BottomSheetCriarEncontro extends BottomSheetDialogFragment {
     EditText temaDoEncontro, data, descricao;
     MaskedEditText inicio , fim;
     FrameLayout btn_escolherlocal, btn_concluir;
-    int idAgrupamento;
+    String idAgrupamento;
 
-    public void show(@NonNull FragmentManager manager, @Nullable String tag, int idAgrupamento) {
+    public void show(@NonNull FragmentManager manager, @Nullable String tag, String idAgrupamento) {
         super.show(manager, tag);
         this.idAgrupamento=idAgrupamento;
     }
@@ -90,7 +91,8 @@ public class BottomSheetCriarEncontro extends BottomSheetDialogFragment {
 
                 }
                 if (verificadados){
-                    Encontro encontro = new Encontro((int)System.currentTimeMillis(),
+                    Encontro encontro = new Encontro(
+                            MainActivity.genUUI(),
                             temaDoEncontro.getText().toString(),
                             idAgrupamento,
                             descricao.getText().toString());

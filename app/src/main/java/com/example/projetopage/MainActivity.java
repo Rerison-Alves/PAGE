@@ -31,6 +31,9 @@ import com.example.projetopage.adapters.BottomSheetCriarGrupo;
 import com.example.projetopage.adapters.BottomSheetLoginAluno;
 import com.example.projetopage.adapters.GrupoDialog;
 import com.example.projetopage.adapters.PopupDialogConvidaUsuario;
+import com.example.projetopage.util.UsuarioAutenticado;
+
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,7 +67,12 @@ public class MainActivity extends AppCompatActivity {
                 case MotionEvent.ACTION_UP:
                 {
 //                    abrirtela2(v);
-                    bottomsheetcadastro();
+                    if(UsuarioAutenticado.UsuarioLogado()==null){
+                        bottomsheetcadastro();
+                    }else {
+                        startPrincipal();
+                        finish();
+                    }
                     par.topMargin+=(int)event.getRawY()-prevY;
                     v.setLayoutParams(par);
                     return true;
@@ -82,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void startPrincipal(){
+        Intent principal = new Intent(this, AbaPrincipal.class);
+        startActivity(principal);
+    }
     public void bottomsheetcadastro(){
         BottomSheetCadastro bottomSheetCadastro = new BottomSheetCadastro();
         bottomSheetCadastro.show(getSupportFragmentManager(), "TAG");
@@ -98,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         BottomSheetCriarGrupo bottomSheetCriarGrupo = new BottomSheetCriarGrupo();
         bottomSheetCriarGrupo.show(fragmentManager,"TAG");
     }
-    static public void bottomsheetcriarencontro(FragmentManager fragmentManager, int idAgrupamento){
+    static public void bottomsheetcriarencontro(FragmentManager fragmentManager, String idAgrupamento){
         BottomSheetCriarEncontro bottomSheetCriarEncontro = new BottomSheetCriarEncontro();
         bottomSheetCriarEncontro.show(fragmentManager,"TAG", idAgrupamento);
     }
@@ -135,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
     }
     static public void deletaEncontro(Encontro encontro, Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage("Ao fazer isso seu encontro será excluido permanentemente!").setTitle("Deseja excluir "+ encontro.getNome()+ "?");
+        builder.setMessage("Ao fazer isso seu encontro será excluido permanentemente!").setTitle("Deseja excluir "+ encontro.getTema()+ "?");
         builder.setNegativeButton(R.string.sim, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 encontro.remove();
@@ -150,5 +162,10 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
+    }
+
+    public static String genUUI() {
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
     }
 }

@@ -48,8 +48,6 @@ public class BottomSheetLoginAluno extends BottomSheetDialogFragment {
             public void onClick(View view) {
                 if(verificadados()){
                     Aluno aluno = new Aluno();
-                    aluno.setEmail(email.getText().toString());
-                    aluno.setSenha(senha.getText().toString());
                     login(aluno);
                 }
             }
@@ -58,7 +56,7 @@ public class BottomSheetLoginAluno extends BottomSheetDialogFragment {
     }
 
     private void login(Aluno aluno) {
-        auth.signInWithEmailAndPassword(aluno.getEmail(), aluno.getSenha()
+        auth.signInWithEmailAndPassword(email.getText().toString(), senha.getText().toString()
         ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -67,6 +65,7 @@ public class BottomSheetLoginAluno extends BottomSheetDialogFragment {
                     Intent ittela2 = new Intent(getActivity(), AbaPrincipal.class);
                     startActivity(ittela2);
                     dismiss();
+                    getActivity().finish();
                 }else {
                     String excessão;
                     try {

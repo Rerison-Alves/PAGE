@@ -31,7 +31,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floatingActionButton"
+                android:id="@+id/config"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -43,7 +43,7 @@
                 android:clickable="true"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floatingActionButton2"
+                android:id="@+id/notificaos"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -76,7 +76,7 @@
             </FrameLayout>
 
             <LinearLayout
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <LinearLayout
@@ -96,11 +96,13 @@
                     <TextView
                         android:id="@+id/nomeusuariologado"
                         style="@style/textonormal"
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/app_name" />
+                        android:layout_weight="1"
+                        android:text="" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -108,7 +110,7 @@
                     android:gravity="center|start">
 
                     <TextView
-                         style="@style/textonormal"
+                        style="@style/textonormal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Curso:"
@@ -117,10 +119,11 @@
                     <TextView
                         android:id="@+id/cursousuariologado"
                         style="@style/textonormal"
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/app_name" />
+                        android:layout_weight="1"
+                        android:layout_marginHorizontal="20dp"
+                        android:text="" />
                 </LinearLayout>
             </LinearLayout>
 

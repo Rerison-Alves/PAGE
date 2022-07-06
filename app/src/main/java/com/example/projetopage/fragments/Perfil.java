@@ -1,6 +1,7 @@
 package com.example.projetopage.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,7 +25,9 @@ import com.example.projetopage.adapters.RecyclerViewAdapterPerfil;
 import com.example.projetopage.util.UsuarioAutenticado;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -73,6 +76,7 @@ public class Perfil extends Fragment {
     Context context;
     RecyclerViewAdapterPerfil recyclerViewAdapterPerfil;
     ArrayList<Grupo> ListadeGrupos = new ArrayList<Grupo>();
+    FloatingActionButton config;
     TextView nomeusuariologado, cursousuariologado;
     Aluno aluno=new Aluno();
     FirebaseUser firebaseUser;
@@ -84,6 +88,16 @@ public class Perfil extends Fragment {
         firebaseUser = UsuarioAutenticado.UsuarioLogado();
         nomeusuariologado=(TextView) view.findViewById(R.id.nomeusuariologado);
         cursousuariologado=(TextView) view.findViewById(R.id.cursousuariologado);
+        config=(FloatingActionButton) view.findViewById(R.id.config);
+        config.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent ittela2 = new Intent(getActivity(), MainActivity.class);
+                startActivity(ittela2);
+                getActivity().finish();
+                FirebaseAuth.getInstance().signOut();
+            }
+        });
         nomeusuariologado.setText(firebaseUser.getDisplayName());
         context= getContext();
         inicializarfirebase();
@@ -96,13 +110,19 @@ public class Perfil extends Fragment {
                 MainActivity.bottomsheetcriargrupo(getParentFragmentManager());
             }
         });
+        getAluno();
+
+        return view;
+    }
+
+    private void getAluno() {
         myRef.child("Usuario").orderByChild(firebaseUser.getUid());
         DatabaseReference users = myRef.child("Usuario").child(firebaseUser.getUid());
         users.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 aluno = snapshot.getValue(Aluno.class);
-                nomeusuariologado.setText(aluno.getNome());
+                nomeusuariologado.setText(UsuarioAutenticado.UsuarioLogado().getDisplayName());
                 cursousuariologado.setText(aluno.getCurso());
             }
 
@@ -111,8 +131,6 @@ public class Perfil extends Fragment {
 
             }
         });
-
-        return view;
     }
 
 
