@@ -114,8 +114,9 @@ public class BottomSheetCadastroAluno extends BottomSheetDialogFragment {
                                                     dismiss();
                                                     MainActivity.loginaluno(getParentFragmentManager());
                                                     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                                                    aluno.setIdAluno(user.getUid());
+                                                    aluno.setIdUsuario(user.getUid());
                                                     mDatabase.child("Usuario").child(user.getUid()).setValue(aluno);
+                                                    FirebaseAuth.getInstance().signOut();
                                                     Toast.makeText(getContext(), "Sua conta foi cadastrada!\nVerifique seu email!", Toast.LENGTH_LONG).show();
                                                 }else {
                                                     Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();

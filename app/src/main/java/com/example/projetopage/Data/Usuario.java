@@ -1,10 +1,12 @@
 package com.example.projetopage.Data;
 
 
+import androidx.annotation.Nullable;
+
 import java.util.Date;
 
 public abstract class Usuario {
-    private String nome, email;
+    private String idUsuario, nome, email;
     private Date datanasc;
 
     public Usuario() {
@@ -14,6 +16,13 @@ public abstract class Usuario {
         this.nome = nome;
         this.email = email;
         this.datanasc = datanasc;
+    }
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idAluno) {
+        this.idUsuario = idAluno;
     }
 
     public String getNome() {
@@ -39,4 +48,5 @@ public abstract class Usuario {
     public void setDatanasc(Date datanasc) {
         this.datanasc = datanasc;
     }
+
 }

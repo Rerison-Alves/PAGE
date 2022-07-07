@@ -8,6 +8,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projetopage.Data.Encontro;
@@ -22,9 +23,11 @@ public class RecyclerViewAdapterEncontros extends RecyclerView.Adapter<RecyclerV
     Context context;
     View view;
     ViewHolder viewHolder;
+    FragmentManager fragmentManager;
 
-    public RecyclerViewAdapterEncontros(Context context, ArrayList<Encontro> encontros){
+    public RecyclerViewAdapterEncontros(Context context, FragmentManager fragmentManager, ArrayList<Encontro> encontros){
         this.encontros = encontros;
+        this.fragmentManager=fragmentManager;
         this.context=context;
     }
 
@@ -55,7 +58,7 @@ public class RecyclerViewAdapterEncontros extends RecyclerView.Adapter<RecyclerV
         holder.consulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                MainActivity.consultaEncontro(encontros.get(position), context, fragmentManager);
             }
         });
         holder.excluir.setOnClickListener(new View.OnClickListener() {

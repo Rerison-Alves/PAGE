@@ -29,6 +29,7 @@ import com.example.projetopage.adapters.BottomSheetCadastroAluno;
 import com.example.projetopage.adapters.BottomSheetCriarEncontro;
 import com.example.projetopage.adapters.BottomSheetCriarGrupo;
 import com.example.projetopage.adapters.BottomSheetLoginAluno;
+import com.example.projetopage.adapters.EncontroDialog;
 import com.example.projetopage.adapters.GrupoDialog;
 import com.example.projetopage.adapters.PopupDialogConvidaUsuario;
 import com.example.projetopage.util.UsuarioAutenticado;
@@ -123,8 +124,9 @@ public class MainActivity extends AppCompatActivity {
         GrupoDialog dialog = new GrupoDialog(grupo, context, fragmentManager, R.style.Theme_ProjetoPAGE);
         dialog.show();
     }
-    static public void consultaEncontro(Encontro encontro, Context context){
-
+    static public void consultaEncontro(Encontro encontro, Context context, FragmentManager fragmentManager){
+        EncontroDialog dialog = new EncontroDialog(encontro, context, fragmentManager, R.style.Theme_ProjetoPAGE);
+        dialog.show();
     }
 
     static public void deletaGrupo(Agrupamento agrupamento, Context context){

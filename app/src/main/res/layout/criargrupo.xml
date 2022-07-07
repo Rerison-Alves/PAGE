@@ -136,6 +136,7 @@
                 android:foreground="?android:attr/selectableItemBackground">
 
                 <TextView
+                    android:id="@+id/nconvidados"
                     style="@style/textonormal"
                     android:layout_width="40dp"
                     android:layout_height="30dp"

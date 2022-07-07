@@ -6,14 +6,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projetopage.Data.Aluno;
 import com.example.projetopage.Data.Encontro;
 import com.example.projetopage.Data.Grupo;
+import com.example.projetopage.Data.Usuario;
+import com.example.projetopage.Data.UsuarioAgrupamento;
 import com.example.projetopage.MainActivity;
 import com.example.projetopage.R;
 import com.google.firebase.FirebaseApp;
@@ -28,6 +32,7 @@ import java.util.ArrayList;
 
 public class GrupoDialog extends Dialog {
     private DatabaseReference myRef;
+    Aluno admobj=new Aluno();
     Grupo grupo;
     Context context;
     FragmentManager fragmentManager;
@@ -40,7 +45,7 @@ public class GrupoDialog extends Dialog {
         this.fragmentManager=fragmentManager;
     }
 
-    TextView nomeGrupo, areaestudo,descricao;
+    TextView nomeGrupo, areaestudo,descricao, adm;
     FrameLayout btn_novoencontro;
     RecyclerView listaEncontros;
     RecyclerViewAdapterEncontros recyclerViewAdapterEncontros;
@@ -49,7 +54,6 @@ public class GrupoDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consultargrupo);
-        context=getContext();
         inicializarfirebase();
         Consulta();
         nomeGrupo=(TextView) findViewById(R.id.nomeGrupo);
@@ -58,6 +62,8 @@ public class GrupoDialog extends Dialog {
         descricao.setText(grupo.getDescricao());
         areaestudo=(TextView) findViewById(R.id.areaestudo);
         areaestudo.setText(grupo.getAreadeEstudo());
+        adm=(TextView) findViewById(R.id.adm);
+        getAdm();
         btn_novoencontro=(FrameLayout) findViewById(R.id.btn_novoencontro);
         btn_novoencontro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,18 +74,50 @@ public class GrupoDialog extends Dialog {
 
     }
 
+    private void getAdm() {
+        Query query = myRef.child("UsuarioAgrupamento");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot objsnapshot:snapshot.getChildren()){
+                    UsuarioAgrupamento usuarioAgrupamento = objsnapshot.getValue(UsuarioAgrupamento.class);
+                    if(usuarioAgrupamento.getIdAgrupmaneto().equals(grupo.getIdAgrupamento())
+                    &&usuarioAgrupamento.isAdm()){
+                        DatabaseReference users = myRef.child("Usuario").child(usuarioAgrupamento.getIdUsuario());
+                        users.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                admobj = snapshot.getValue(Aluno.class);
+                                adm.setText(admobj.getNome());
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void listaDeEncontros() {
         context=getContext();
         listaEncontros = (RecyclerView) findViewById(R.id.listaEncontros);
         RecyclerView.LayoutManager recycleLayoutEncontros = new LinearLayoutManager(context) ;
         listaEncontros.setLayoutManager(recycleLayoutEncontros);
-        recyclerViewAdapterEncontros = new RecyclerViewAdapterEncontros(context, ListadeEncontros);
+        recyclerViewAdapterEncontros = new RecyclerViewAdapterEncontros(context, fragmentManager, ListadeEncontros);
         listaEncontros.setAdapter(recyclerViewAdapterEncontros);
         listaEncontros.setNestedScrollingEnabled( false );
     }
 
     private void Consulta() {
-        Query queryListadeEncontros= myRef.orderByChild("tema");
+        Query queryListadeEncontros= myRef.child("Agrupamentos").child(String.valueOf(grupo.getIdAgrupamento())).child("Encontros").orderByChild("tema");
         queryListadeEncontros.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -99,6 +137,6 @@ public class GrupoDialog extends Dialog {
     public void inicializarfirebase(){
         FirebaseApp.initializeApp(context);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        myRef = database.getReference().child("Agrupamentos").child(String.valueOf(grupo.getIdAgrupamento())).child("Encontros");
+        myRef = database.getReference();
     }
 }

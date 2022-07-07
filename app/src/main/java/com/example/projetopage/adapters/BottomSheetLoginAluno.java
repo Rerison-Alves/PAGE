@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 
 import com.example.projetopage.AbaPrincipal;
 import com.example.projetopage.Data.Aluno;
+import com.example.projetopage.MainActivity;
 import com.example.projetopage.R;
 import com.example.projetopage.util.UsuarioAutenticado;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,7 +34,7 @@ import javax.mail.internet.InternetAddress;
 public class BottomSheetLoginAluno extends BottomSheetDialogFragment {
 
     EditText email, senha;
-    FrameLayout btn_concluir;
+    FrameLayout btn_concluir, btn_cadastro;
     private FirebaseAuth auth;
     @Nullable
     @Override
@@ -50,6 +51,14 @@ public class BottomSheetLoginAluno extends BottomSheetDialogFragment {
                     Aluno aluno = new Aluno();
                     login(aluno);
                 }
+            }
+        });
+        btn_cadastro = (FrameLayout) view.findViewById(R.id.cadastro);
+        btn_cadastro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+                MainActivity.cadastroaluno(getParentFragmentManager());
             }
         });
         return view;

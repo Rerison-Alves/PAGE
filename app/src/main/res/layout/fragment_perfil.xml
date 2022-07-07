@@ -71,8 +71,7 @@
                     android:id="@+id/imageView3"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/logo_page"
-                    app:srcCompat="@drawable/leia_o_simbolo_de_um_aluno_lendo" />
+                    android:src="@drawable/leia_o_simbolo_de_um_aluno_lendo" />
             </FrameLayout>
 
             <LinearLayout

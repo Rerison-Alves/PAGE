@@ -116,7 +116,6 @@ public class Perfil extends Fragment {
     }
 
     private void getAluno() {
-        myRef.child("Usuario").orderByChild(firebaseUser.getUid());
         DatabaseReference users = myRef.child("Usuario").child(firebaseUser.getUid());
         users.addValueEventListener(new ValueEventListener() {
             @Override

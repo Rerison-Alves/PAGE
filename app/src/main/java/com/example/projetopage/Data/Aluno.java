@@ -1,9 +1,10 @@
 package com.example.projetopage.Data;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Aluno extends Usuario{
-    private String idAluno, curso, matricula;
+    private String curso, matricula;
     public Aluno() {
     }
 
@@ -13,13 +14,6 @@ public class Aluno extends Usuario{
         this.matricula = matricula;
     }
 
-    public String getIdAluno() {
-        return idAluno;
-    }
-
-    public void setIdAluno(String idAluno) {
-        this.idAluno = idAluno;
-    }
 
     public String getCurso() {
         return curso;
@@ -35,5 +29,21 @@ public class Aluno extends Usuario{
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIdUsuario());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof Usuario)) {
+            return false;
+        }
+        Aluno user = (Aluno) o;
+        return getIdUsuario().equals(user.getIdUsuario());
     }
 }
