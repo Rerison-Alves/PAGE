@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.projetopage.Data.Agendamento;
 import com.example.projetopage.Data.Encontro;
 import com.example.projetopage.MainActivity;
 import com.example.projetopage.R;
@@ -68,6 +69,16 @@ public class BottomSheetCriarEncontro extends BottomSheetDialogFragment {
                             idAgrupamento,
                             descricao.getText().toString());
                     encontro.salvar();
+                    Date datainicio=null, datafim=null;
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat formata = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+                    try {
+                        datainicio=formata.parse(inicio.getText()+" "+data.getText().toString());
+                        datafim=formata.parse(fim.getText()+" "+data.getText().toString());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    Agendamento agendamento = new Agendamento(MainActivity.genUUI(),encontro.getIdEncontro(), "Online", datainicio, datafim);
+                    agendamento.salvar();
                     dismiss();
                 }
 

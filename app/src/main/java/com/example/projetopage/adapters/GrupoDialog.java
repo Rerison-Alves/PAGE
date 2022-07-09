@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +47,7 @@ public class GrupoDialog extends Dialog {
     }
 
     TextView nomeGrupo, areaestudo,descricao, adm;
-    FrameLayout btn_novoencontro;
+    Button btn_novoencontro;
     RecyclerView listaEncontros;
     RecyclerViewAdapterEncontros recyclerViewAdapterEncontros;
 
@@ -64,7 +65,7 @@ public class GrupoDialog extends Dialog {
         areaestudo.setText(grupo.getAreadeEstudo());
         adm=(TextView) findViewById(R.id.adm);
         getAdm();
-        btn_novoencontro=(FrameLayout) findViewById(R.id.btn_novoencontro);
+        btn_novoencontro=(Button) findViewById(R.id.btn_novoencontro);
         btn_novoencontro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

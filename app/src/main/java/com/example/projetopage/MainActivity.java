@@ -29,10 +29,12 @@ import com.example.projetopage.adapters.BottomSheetCadastroAluno;
 import com.example.projetopage.adapters.BottomSheetCriarEncontro;
 import com.example.projetopage.adapters.BottomSheetCriarGrupo;
 import com.example.projetopage.adapters.BottomSheetLoginAluno;
+import com.example.projetopage.adapters.ChatDialog;
 import com.example.projetopage.adapters.EncontroDialog;
 import com.example.projetopage.adapters.GrupoDialog;
 import com.example.projetopage.adapters.PopupDialogConvidaUsuario;
 import com.example.projetopage.util.UsuarioAutenticado;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.UUID;
 
@@ -126,6 +128,11 @@ public class MainActivity extends AppCompatActivity {
     }
     static public void consultaEncontro(Encontro encontro, Context context, FragmentManager fragmentManager){
         EncontroDialog dialog = new EncontroDialog(encontro, context, fragmentManager, R.style.Theme_ProjetoPAGE);
+        dialog.show();
+    }
+
+    static public void consultaChat(Encontro encontro, Context context, FragmentManager fragmentManager, DatabaseReference myRef){
+        ChatDialog dialog = new ChatDialog(encontro, context, fragmentManager, R.style.Theme_ProjetoPAGE, myRef);
         dialog.show();
     }
 

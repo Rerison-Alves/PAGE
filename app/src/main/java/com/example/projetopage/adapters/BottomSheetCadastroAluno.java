@@ -107,22 +107,13 @@ public class BottomSheetCadastroAluno extends BottomSheetDialogFragment {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()){
-                                                    dismiss();
-                                                    MainActivity.loginaluno(getParentFragmentManager());
-                                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                                                    aluno.setIdUsuario(user.getUid());
-                                                    mDatabase.child("Usuario").child(user.getUid()).setValue(aluno);
-                                                    FirebaseAuth.getInstance().signOut();
-                                                    Toast.makeText(getContext(), "Sua conta foi cadastrada!\nVerifique seu email!", Toast.LENGTH_LONG).show();
-                                                }else {
-                                                    Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                                }
-                                            }
-                                        });
+                                        dismiss();
+                                        MainActivity.loginaluno(getParentFragmentManager());
+                                        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                        aluno.setIdUsuario(user.getUid());
+                                        mDatabase.child("Usuario").child(user.getUid()).setValue(aluno);
+                                        FirebaseAuth.getInstance().signOut();
+                                        Toast.makeText(getContext(), "Sua conta foi cadastrada!\nVerifique seu email!", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });

@@ -1,7 +1,18 @@
 package com.example.projetopage.Data;
 
+import android.annotation.SuppressLint;
+
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Encontro {
     private String idEncontro, idAgrupamento;
@@ -61,5 +72,21 @@ public class Encontro {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Agrupamentos").child(String.valueOf(getIdAgrupamento())).child("Encontros")
                 .child(String.valueOf(getIdEncontro())).removeValue();
+        Query query = mDatabase.child("Agendamentos");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot objsnapshot:snapshot.getChildren()){
+                    Agendamento agendamento = objsnapshot.getValue(Agendamento.class);
+                    if(agendamento.getIdEncontro().equals(getIdEncontro())){
+                        mDatabase.child("Agendamentos").child(agendamento.getIdAgendamento()).removeValue();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
