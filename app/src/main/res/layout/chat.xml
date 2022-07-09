@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/black_fraco">
     <FrameLayout
+        android:id="@+id/frameLayout2"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#AAAAAA"
-        android:elevation="20dp">
+        android:elevation="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/Tema"
@@ -34,50 +39,58 @@
             android:src="@drawable/ic_back" />
     </FrameLayout>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/black_fraco"
-        android:layoutDirection="locale">
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="45dp"
-            app:reverseLayout="true"/>
+            app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:reverseLayout="true"
+            app:stackFromEnd="true" />
+
         <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#AAAAAA"
             android:layout_gravity="bottom"
-            android:orientation="horizontal">
+            android:background="#AAAAAA"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
             <EditText
                 android:id="@+id/texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/digite_uma_mensagem"
+                android:layout_marginVertical="12dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="50dp"
                 android:background="#01000000"
                 android:ems="10"
+                android:hint="@string/digite_uma_mensagem"
                 android:inputType="textMultiLine"
-                android:layout_marginEnd="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginVertical="10dp"
-                android:maxLength="500"/>
+                android:maxLength="500" />
+
             <ImageView
                 android:id="@+id/send"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="end|center"
                 android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_baseline_send_24"
                 android:clickable="true"
-                android:focusable="true"/>
+                android:focusable="true"
+                android:src="@drawable/ic_baseline_send_24" />
         </FrameLayout>
-    </FrameLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>

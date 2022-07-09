@@ -110,6 +110,7 @@ public class ChatDialog extends Dialog {
                 for (Mensagem mensagem:lista){
                     adapter.add(new MessageItem(mensagem));
                 }
+                chat.scrollToPosition(lista.size()-1);
             }
 
             @Override

@@ -1,29 +1,24 @@
 package com.example.projetopage;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.projetopage.Data.Agrupamento;
 import com.example.projetopage.Data.Encontro;
 import com.example.projetopage.Data.Grupo;
+import com.example.projetopage.Data.UsuarioAgrupamento;
 import com.example.projetopage.adapters.BottomSheetCadastro;
 import com.example.projetopage.adapters.BottomSheetCadastroAluno;
 import com.example.projetopage.adapters.BottomSheetCriarEncontro;
@@ -32,9 +27,15 @@ import com.example.projetopage.adapters.BottomSheetLoginAluno;
 import com.example.projetopage.adapters.ChatDialog;
 import com.example.projetopage.adapters.EncontroDialog;
 import com.example.projetopage.adapters.GrupoDialog;
+import com.example.projetopage.adapters.GrupoDialogPerfil;
 import com.example.projetopage.adapters.PopupDialogConvidaUsuario;
 import com.example.projetopage.util.UsuarioAutenticado;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.UUID;
 
@@ -122,6 +123,10 @@ public class MainActivity extends AppCompatActivity {
         popupDialogConvidaUsuario.show(fragmentManager, "TAG");
     }
 
+    static public void consultaGrupoPerfil(Grupo grupo, Context context, FragmentManager fragmentManager){
+        GrupoDialogPerfil dialog = new GrupoDialogPerfil(grupo, context, fragmentManager, R.style.Theme_ProjetoPAGE);
+        dialog.show();
+    }
     static public void consultaGrupo(Grupo grupo, Context context, FragmentManager fragmentManager){
         GrupoDialog dialog = new GrupoDialog(grupo, context, fragmentManager, R.style.Theme_ProjetoPAGE);
         dialog.show();
@@ -141,6 +146,25 @@ public class MainActivity extends AppCompatActivity {
         builder.setMessage("Ao fazer isso seu grupo/turma será excluido permanentemente!").setTitle("Deseja excluir "+ agrupamento.getNome()+ "?");
         builder.setNegativeButton(R.string.sim, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference();
+                Query query = myRef.child("UsuarioAgrupamento");
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot objsnapshot:snapshot.getChildren()) {
+                            UsuarioAgrupamento usuarioAgrupamento = objsnapshot.getValue(UsuarioAgrupamento.class);
+                            if(usuarioAgrupamento.getIdAgrupmaneto().equals(agrupamento.getIdAgrupamento())){
+                                usuarioAgrupamento.remove();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 agrupamento.remove();
             }
         });

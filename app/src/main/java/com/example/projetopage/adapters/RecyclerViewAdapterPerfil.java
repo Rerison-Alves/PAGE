@@ -8,12 +8,20 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projetopage.Data.Grupo;
+import com.example.projetopage.Data.UsuarioAgrupamento;
 import com.example.projetopage.MainActivity;
 import com.example.projetopage.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -57,7 +65,7 @@ public class RecyclerViewAdapterPerfil extends RecyclerView.Adapter<RecyclerView
         holder.consulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.consultaGrupo(grupos.get(position), context, fragmentManager);
+                MainActivity.consultaGrupoPerfil(grupos.get(position), context, fragmentManager);
             }
         });
         holder.excluir.setOnClickListener(new View.OnClickListener() {

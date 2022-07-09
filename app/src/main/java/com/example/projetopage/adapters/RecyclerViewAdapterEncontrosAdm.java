@@ -29,14 +29,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class RecyclerViewAdapterEncontros extends RecyclerView.Adapter<RecyclerViewAdapterEncontros.ViewHolder> {
+public class RecyclerViewAdapterEncontrosAdm extends RecyclerView.Adapter<RecyclerViewAdapterEncontrosAdm.ViewHolder> {
     ArrayList<Encontro> encontros;
     Context context;
     View view;
     ViewHolder viewHolder;
     FragmentManager fragmentManager;
 
-    public RecyclerViewAdapterEncontros(Context context, FragmentManager fragmentManager, ArrayList<Encontro> encontros){
+    public RecyclerViewAdapterEncontrosAdm(Context context, FragmentManager fragmentManager, ArrayList<Encontro> encontros){
         this.encontros = encontros;
         this.fragmentManager=fragmentManager;
         this.context=context;
@@ -45,7 +45,7 @@ public class RecyclerViewAdapterEncontros extends RecyclerView.Adapter<RecyclerV
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView nomeDoEncontro, data, local;
-        public ImageButton edit;
+        public ImageButton edit, excluir;
         public FrameLayout consulta;
         public ViewHolder(View v){
             super(v);
@@ -53,12 +53,13 @@ public class RecyclerViewAdapterEncontros extends RecyclerView.Adapter<RecyclerV
             data = v.findViewById(R.id.data);
             local = v.findViewById(R.id.local);
             edit = v.findViewById(R.id.edit);
+            excluir= v.findViewById(R.id.excluir);
             consulta=v.findViewById(R.id.consulta);
         }
     }
 
-    public RecyclerViewAdapterEncontros.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-    view = LayoutInflater.from(context).inflate(R.layout.card_grupos_encontros, parent, false);
+    public RecyclerViewAdapterEncontrosAdm.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    view = LayoutInflater.from(context).inflate(R.layout.card_grupos_encontros_adm, parent, false);
     viewHolder = new ViewHolder(view);
     return viewHolder;
     }
@@ -72,7 +73,12 @@ public class RecyclerViewAdapterEncontros extends RecyclerView.Adapter<RecyclerV
                 MainActivity.consultaEncontro(encontros.get(position), context, fragmentManager);
             }
         });
-
+        holder.excluir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.deletaEncontro(encontros.get(position), context);
+            }
+        });
 
         FirebaseApp.initializeApp(context);
         FirebaseDatabase database = FirebaseDatabase.getInstance();

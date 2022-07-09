@@ -17,8 +17,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projetopage.Data.Agrupamento;
 import com.example.projetopage.Data.Aluno;
 import com.example.projetopage.Data.Grupo;
+import com.example.projetopage.Data.UsuarioAgrupamento;
 import com.example.projetopage.MainActivity;
 import com.example.projetopage.R;
 import com.example.projetopage.adapters.RecyclerViewAdapterPerfil;
@@ -143,16 +145,34 @@ public class Perfil extends Fragment {
     }
 
     private void ConsultaGrupos(View view) {
-        Query queryListadeGrupos= myRef.child("Agrupamentos").orderByChild("nome");
-        queryListadeGrupos.addValueEventListener(new ValueEventListener() {
+        Query query = myRef.child("Agrupamentos").orderByChild("nome");
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ListadeGrupos.clear();
                 for(DataSnapshot objsnapshot:snapshot.getChildren()){
-                    Grupo g = objsnapshot.getValue(Grupo.class);
-                    ListadeGrupos.add(g);
+                    Grupo grupo = objsnapshot.getValue(Grupo.class);
+                    Query query = myRef.child("UsuarioAgrupamento");
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot objsnapshot:snapshot.getChildren()){
+                                UsuarioAgrupamento usuarioAgrupamento = objsnapshot.getValue(UsuarioAgrupamento.class);
+                                if(usuarioAgrupamento.getIdUsuario().equals(UsuarioAutenticado.UsuarioLogado().getUid())&&usuarioAgrupamento.isAdm()){
+                                    if(grupo.getIdAgrupamento().equals(usuarioAgrupamento.getIdAgrupmaneto())){
+                                        ListadeGrupos.add(grupo);
+                                    }
+                                }
+                            }
+                            listaDeGrupos(view);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
-                listaDeGrupos(view);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
