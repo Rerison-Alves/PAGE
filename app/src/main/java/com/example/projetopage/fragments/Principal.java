@@ -39,7 +39,6 @@ public class Principal extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private String mParam1;
     private String mParam2;
 
     public Principal() {
@@ -60,15 +59,15 @@ public class Principal extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
     }
     DatabaseReference myRef;
     String[] testeRecentes= new String[] {"POO em aplicativos", "POO 2022", "Prog. Linear", "Nome de grupo", "Tô sem ideia"};
-    ArrayList<Grupo> listaTodos = new ArrayList<Grupo>();
-    ArrayList<Encontro> ListadeEncontros= new ArrayList<Encontro>();
+    ArrayList<Grupo> listaTodos = new ArrayList<>();
+    ArrayList<Encontro> ListadeEncontros= new ArrayList<>();
     Context context;
     RecyclerViewAdapterRecentes recyclerViewAdapterRecentes;
     RecyclerViewAdapterEncontrosPrincipal recyclerViewAdapterEncontrosPrincipal;
@@ -97,14 +96,14 @@ public class Principal extends Fragment {
     private void listarRecentes() {
         RecyclerView.LayoutManager recycleLayoutRecentes = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recentesView.setLayoutManager(recycleLayoutRecentes);
-        recyclerViewAdapterRecentes = new RecyclerViewAdapterRecentes(context, getActivity().getSupportFragmentManager(), listaTodos);
+        recyclerViewAdapterRecentes = new RecyclerViewAdapterRecentes(context, requireActivity().getSupportFragmentManager(), listaTodos);
         recentesView.setAdapter(recyclerViewAdapterRecentes);
     }
 
     private void listarTodos(RecyclerView recyclerView) {
         RecyclerView.LayoutManager recycleLayoutTodos = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recycleLayoutTodos);
-        recyclerViewAdapterExtended = new RecyclerViewAdapterExtended(context, getActivity().getSupportFragmentManager(), listaTodos);
+        recyclerViewAdapterExtended = new RecyclerViewAdapterExtended(context, requireActivity().getSupportFragmentManager(), listaTodos);
         recyclerView.setAdapter(recyclerViewAdapterExtended);
     }
 
@@ -114,7 +113,7 @@ public class Principal extends Fragment {
         Set<Encontro> set = new HashSet<>(ListadeEncontros);
         ListadeEncontros.clear();
         ListadeEncontros.addAll(set);
-        recyclerViewAdapterEncontrosPrincipal = new RecyclerViewAdapterEncontrosPrincipal(context, getActivity().getSupportFragmentManager(), ListadeEncontros);
+        recyclerViewAdapterEncontrosPrincipal = new RecyclerViewAdapterEncontrosPrincipal(context, requireActivity().getSupportFragmentManager(), ListadeEncontros);
         recyclerView.setAdapter(recyclerViewAdapterEncontrosPrincipal);
     }
 
@@ -123,7 +122,7 @@ public class Principal extends Fragment {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<Grupo> todos = new ArrayList<Grupo>();
+                ArrayList<Grupo> todos = new ArrayList<>();
                 for(DataSnapshot objsnapshot:snapshot.getChildren()){
                     Grupo grupo = objsnapshot.getValue(Grupo.class);
                     Query query = myRef.child("UsuarioAgrupamento");
@@ -132,7 +131,9 @@ public class Principal extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for(DataSnapshot objsnapshot:snapshot.getChildren()){
                                 UsuarioAgrupamento usuarioAgrupamento = objsnapshot.getValue(UsuarioAgrupamento.class);
+                                assert usuarioAgrupamento != null;
                                 if(usuarioAgrupamento.getIdUsuario().equals(UsuarioAutenticado.UsuarioLogado().getUid())){
+                                    assert grupo != null;
                                     if(grupo.getIdAgrupamento().equals(usuarioAgrupamento.getIdAgrupmaneto())){
                                         todos.add(grupo);
                                     }
@@ -147,7 +148,7 @@ public class Principal extends Fragment {
                                             Encontro encontro = objsnapshot.getValue(Encontro.class);
                                             ListadeEncontros.add(encontro);
                                         }
-                                        Set<Encontro> set = new LinkedHashSet<Encontro>(ListadeEncontros);
+                                        Set<Encontro> set = new LinkedHashSet<>(ListadeEncontros);
                                         ListadeEncontros.clear();
                                         ListadeEncontros.addAll(set);
                                         listarEncontros(encontrosView);
@@ -189,8 +190,10 @@ public class Principal extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for(DataSnapshot objsnapshot:snapshot.getChildren()){
                                 UsuarioAgrupamento usuarioAgrupamento = objsnapshot.getValue(UsuarioAgrupamento.class);
+                                assert usuarioAgrupamento != null;
                                 if(usuarioAgrupamento.getIdUsuario().equals(UsuarioAutenticado.UsuarioLogado().getUid())
                                         &&!usuarioAgrupamento.isAdm()){
+                                    assert grupo != null;
                                     if(grupo.getIdAgrupamento().equals(usuarioAgrupamento.getIdAgrupmaneto())){
                                         listaTodos.add(grupo);
                                     }
