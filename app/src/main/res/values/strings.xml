@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Projeto PAGE</string>
+    <string name="app_name">PAGE</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="page">P A G E</string>
@@ -53,6 +53,8 @@
     <string name="digite_a_senha_novamente">Digite a senha novamente*:</string>
     <string name="digite_uma_mensagem">Digite uma mensagem...</string>
     <string name="configura_es">Configurações</string>
+    <string name="app_label">label</string>
+    <string name="search_hint">Pesquisar um curso...</string>
     <string-array name="cursos">
         <item>Indefinido</item>
         <item>Ciência da Computação</item>

@@ -37,10 +37,10 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 app:fabCustomSize="40dp"
+                android:layout_marginEnd="5dp"
                 android:src="@drawable/ic_settings"
                 app:elevation="0dp"
-                app:backgroundTint="@color/white"
-                android:clickable="true"/>
+                app:backgroundTint="@color/white"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/notificaos"
@@ -49,10 +49,10 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 app:fabCustomSize="40dp"
+                android:layout_marginEnd="10dp"
                 android:src="@drawable/ic_notification"
                 app:elevation="0dp"
-                app:backgroundTint="@color/white"
-                android:clickable="true"/>
+                app:backgroundTint="@color/white"/>
 
         </LinearLayout>
 

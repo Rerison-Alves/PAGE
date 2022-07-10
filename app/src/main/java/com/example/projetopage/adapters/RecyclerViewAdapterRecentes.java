@@ -71,13 +71,15 @@ public class RecyclerViewAdapterRecentes extends RecyclerView.Adapter<RecyclerVi
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<UsuarioAgrupamento> list = new ArrayList<UsuarioAgrupamento>();
+                String area="";
                 for(DataSnapshot objsnapshot:snapshot.getChildren()) {
                     UsuarioAgrupamento usuarioAgrupamento = objsnapshot.getValue(UsuarioAgrupamento.class);
                     if(Grupos.get(position).getIdAgrupamento().equals(usuarioAgrupamento.getIdAgrupmaneto())){
                         list.add(usuarioAgrupamento);
+                        area=Grupos.get(position).getAreadeEstudo();
                     }
                 }
-                String textoparticipantes = list.size()+" participantes";
+                String textoparticipantes = list.size()+" participantes\n"+area;
                 holder.desc.setText(textoparticipantes);
             }
 

@@ -1,13 +1,17 @@
 package com.example.projetopage.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.projetopage.Data.Agendamento;
 import com.example.projetopage.Data.Encontro;
+import com.example.projetopage.Data.Local;
 import com.example.projetopage.MainActivity;
 import com.example.projetopage.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -30,6 +35,7 @@ public class BottomSheetCriarEncontro extends BottomSheetDialogFragment {
     public BottomSheetCriarEncontro() {
     }
     Context context;
+    TextView localselecionado;
     EditText temaDoEncontro, data, descricao;
     MaskedEditText inicio , fim;
     FrameLayout btn_escolherlocal, btn_concluir;
@@ -49,14 +55,15 @@ public class BottomSheetCriarEncontro extends BottomSheetDialogFragment {
         data = (EditText) view.findViewById(R.id.data);
         inicio = (MaskedEditText) view.findViewById(R.id.datainicio);
         fim = (MaskedEditText) view.findViewById(R.id.datafim);
+        localselecionado = (TextView) view.findViewById(R.id.localselecionado);
         descricao = (EditText) view.findViewById(R.id.descricao);
-        btn_escolherlocal= (FrameLayout) view.findViewById(R.id.btn_convidaalunos);
-//        btn_escolherlocal.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                MainActivity.convidaUsuario(getActivity().getSupportFragmentManager());
-//            }
-//        });
+        btn_escolherlocal= (FrameLayout) view.findViewById(R.id.btn_escolherlocal);
+        btn_escolherlocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.escolherlocal(getActivity().getSupportFragmentManager());
+            }
+        });
 
         btn_concluir= (FrameLayout) view.findViewById(R.id.btn_concluir);
         btn_concluir.setOnClickListener(new View.OnClickListener() {
@@ -77,14 +84,34 @@ public class BottomSheetCriarEncontro extends BottomSheetDialogFragment {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    Agendamento agendamento = new Agendamento(MainActivity.genUUI(),encontro.getIdEncontro(), "Online", datainicio, datafim);
+
+                    Agendamento agendamento = new Agendamento(MainActivity.genUUI(),encontro.getIdEncontro(), getlocal(), datainicio, datafim);
                     agendamento.salvar();
                     dismiss();
                 }
 
             }
         });
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("atualizar_campos")) {
+                    localselecionado.setText(PopupDialogEscolherLocal.localselecionado.getNome());
+                }
+            }
+        };
+        getContext().registerReceiver(broadcastReceiver, new IntentFilter("atualizar_campos"));
         return view;
+    }
+
+    private String getlocal() {
+        if(PopupDialogEscolherLocal.localselecionado!=null){
+            return PopupDialogEscolherLocal.localselecionado.getNome();
+        }else {
+            return "Online";
+        }
+
     }
 
     private boolean Verificadados() {
@@ -125,4 +152,9 @@ public class BottomSheetCriarEncontro extends BottomSheetDialogFragment {
         return verificadados;
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        PopupDialogEscolherLocal.localselecionado=new Local();
+    }
 }

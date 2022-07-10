@@ -83,15 +83,11 @@ public class RecyclerViewAdapterEncontrosPrincipal extends RecyclerView.Adapter<
                         @SuppressLint("SimpleDateFormat") SimpleDateFormat formatadata = new SimpleDateFormat("dd/MM/yyyy");
                         @SuppressLint("SimpleDateFormat") SimpleDateFormat formatahorario = new SimpleDateFormat("HH:mm");
                         Date datainicio=agendamento.getDataInicio(), datafim=agendamento.getDataFim();
-                        if(agendamento.getIdLocal().equals("Online")){
-                            String textodata = formatadata.format(datainicio)+
-                                    " "+formatahorario.format(datainicio)+
-                                    "h - "+formatahorario.format(datafim)+"h "+
-                                    agendamento.getIdLocal();
-                            holder.desc.setText(textodata);
-                        }else {
-//                           Local.setText();
-                        }
+                        String textodata = formatadata.format(datainicio)+
+                                " "+formatahorario.format(datainicio)+
+                                "h - "+formatahorario.format(datafim)+"h "+
+                                agendamento.getIdLocal();
+                        holder.desc.setText(textodata);
                     }
                 }
             }

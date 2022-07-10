@@ -1,5 +1,7 @@
 package com.example.projetopage.fragments;
 
+import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,38 +9,24 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.SearchView;
 
 import com.example.projetopage.R;
+import com.example.projetopage.adapters.CursoDialog;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Pesquisar#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Pesquisar extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     public Pesquisar() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BlankFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Pesquisar newInstance(String param1, String param2) {
         Pesquisar fragment = new Pesquisar();
         Bundle args = new Bundle();
@@ -57,10 +45,43 @@ public class Pesquisar extends Fragment {
         }
     }
 
+    FrameLayout comp, quim, engM;
+    SearchView searchView;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pesquisar, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_pesquisar, container, false);
+        comp = (FrameLayout) view.findViewById(R.id.comp);
+        quim = (FrameLayout) view.findViewById(R.id.quim);
+        engM = (FrameLayout) view.findViewById(R.id.engM);
+//        searchView = (SearchView) view.findViewById(R.id.search);
+
+
+
+
+        comp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CursoDialog cursoDialog=new CursoDialog("Ciência da Computação", getContext(),
+                        getActivity().getSupportFragmentManager(), R.style.Theme_ProjetoPAGE);
+                cursoDialog.show();
+            }
+        });
+        quim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CursoDialog cursoDialog=new CursoDialog("Química", getContext(),
+                        getActivity().getSupportFragmentManager(), R.style.Theme_ProjetoPAGE);
+                cursoDialog.show();
+            }
+        });
+        engM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CursoDialog cursoDialog=new CursoDialog("Engenharia Mecânica", getContext(),
+                        getActivity().getSupportFragmentManager(), R.style.Theme_ProjetoPAGE);
+                cursoDialog.show();
+            }
+        });
+        return view;
     }
 }

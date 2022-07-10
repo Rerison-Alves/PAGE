@@ -97,11 +97,7 @@ public class EncontroDialog extends Dialog {
                         Data.setText(formatadata.format(datainicio));
                         String horarios=formatahorario.format(datainicio)+"h - "+formatahorario.format(datafim)+"h";
                         Horario.setText(horarios);
-                        if(agendamento.getIdLocal().equals("Online")){
-                            Local.setText(agendamento.getIdLocal());
-                        }else {
-//                           Local.setText();
-                        }
+                        Local.setText(agendamento.getIdLocal());
                     }
                 }
             }

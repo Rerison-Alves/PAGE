@@ -1,5 +1,8 @@
 package com.example.projetopage.Data;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Date;
 
 public class Local {
@@ -30,5 +33,10 @@ public class Local {
     }
     public boolean verificadisponibilidade(Date dataInicio, Date dataFim){
         return false;
+    }
+
+    public void salvar(){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Locais").child(String.valueOf(this.getIdLocal())).setValue(this);
     }
 }

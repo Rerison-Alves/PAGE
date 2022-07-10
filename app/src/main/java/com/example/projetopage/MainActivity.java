@@ -19,6 +19,7 @@ import com.example.projetopage.Data.Agendamento;
 import com.example.projetopage.Data.Agrupamento;
 import com.example.projetopage.Data.Encontro;
 import com.example.projetopage.Data.Grupo;
+import com.example.projetopage.Data.Local;
 import com.example.projetopage.Data.UsuarioAgrupamento;
 import com.example.projetopage.adapters.BottomSheetAlterarSenha;
 import com.example.projetopage.adapters.BottomSheetCadastro;
@@ -31,6 +32,7 @@ import com.example.projetopage.adapters.EncontroDialog;
 import com.example.projetopage.adapters.GrupoDialog;
 import com.example.projetopage.adapters.GrupoDialogPerfil;
 import com.example.projetopage.adapters.PopupDialogConvidaUsuario;
+import com.example.projetopage.adapters.PopupDialogEscolherLocal;
 import com.example.projetopage.util.UsuarioAutenticado;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ImageView cima = (ImageView) findViewById(R.id.btn_cima);
-
         cima.setOnTouchListener(new ChoiceTouchListener());
 
     }
@@ -123,6 +124,10 @@ public class MainActivity extends AppCompatActivity {
     static public void convidaUsuario(FragmentManager fragmentManager){
         PopupDialogConvidaUsuario popupDialogConvidaUsuario = new PopupDialogConvidaUsuario();
         popupDialogConvidaUsuario.show(fragmentManager, "TAG");
+    }
+    static public void escolherlocal(FragmentManager fragmentManager){
+        PopupDialogEscolherLocal popupDialogEscolherLocal = new PopupDialogEscolherLocal();
+        popupDialogEscolherLocal.show(fragmentManager, "TAG");
     }
 
     static public void alterasenha(FragmentManager fragmentManager){
