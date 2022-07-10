@@ -45,7 +45,7 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    //Easter egg
     private ViewGroup rootLayout;
     int prevX,prevY;
     @Override
