@@ -1,7 +1,9 @@
 package com.example.projetopage.fragments;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projetopage.Config;
 import com.example.projetopage.Data.Agrupamento;
 import com.example.projetopage.Data.Aluno;
 import com.example.projetopage.Data.Grupo;
@@ -94,10 +98,8 @@ public class Perfil extends Fragment {
         config.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent ittela2 = new Intent(getActivity(), MainActivity.class);
-                startActivity(ittela2);
-                getActivity().finish();
-                FirebaseAuth.getInstance().signOut();
+                Intent startConfig = new Intent(getActivity(), Config.class);
+                startActivity(startConfig);
             }
         });
         nomeusuariologado.setText(firebaseUser.getDisplayName());
@@ -113,7 +115,21 @@ public class Perfil extends Fragment {
             }
         });
         getAluno();
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity")) {
+                    Intent startMain = new Intent(getActivity(), MainActivity.class);
+                    startActivity(startMain);
+                    getActivity().finish();
+                    FirebaseAuth.getInstance().signOut();
+                    // DO WHATEVER YOU WANT.
+                }
+            }
+        };
+        context.registerReceiver(broadcastReceiver, new IntentFilter("finish_activity"));
         return view;
     }
 
@@ -187,5 +203,5 @@ public class Perfil extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
     }
-
+    
 }

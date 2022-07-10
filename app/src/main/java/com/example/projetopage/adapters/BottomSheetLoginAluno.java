@@ -34,7 +34,7 @@ import javax.mail.internet.InternetAddress;
 public class BottomSheetLoginAluno extends BottomSheetDialogFragment {
 
     EditText email, senha;
-    FrameLayout btn_concluir, btn_cadastro;
+    FrameLayout btn_concluir, btn_cadastro, btn_esqueciasenha;
     private FirebaseAuth auth;
     @Nullable
     @Override
@@ -59,6 +59,14 @@ public class BottomSheetLoginAluno extends BottomSheetDialogFragment {
             public void onClick(View view) {
                 dismiss();
                 MainActivity.cadastroaluno(getParentFragmentManager());
+            }
+        });
+        btn_esqueciasenha = (FrameLayout) view.findViewById(R.id.esqueciasenha);
+        btn_esqueciasenha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+                MainActivity.alterasenha(getActivity().getSupportFragmentManager());
             }
         });
         return view;

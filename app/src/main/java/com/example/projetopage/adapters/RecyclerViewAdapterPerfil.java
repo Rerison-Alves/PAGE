@@ -1,6 +1,9 @@
 package com.example.projetopage.adapters;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,20 +11,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projetopage.Data.Grupo;
-import com.example.projetopage.Data.UsuarioAgrupamento;
 import com.example.projetopage.MainActivity;
 import com.example.projetopage.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -45,7 +40,7 @@ public class RecyclerViewAdapterPerfil extends RecyclerView.Adapter<RecyclerView
         public FrameLayout consulta;
         public ViewHolder(View v){
             super(v);
-            nomedogrupo = v.findViewById(R.id.nomeDoGrupo);
+            nomedogrupo = v.findViewById(R.id.textviewPrincipal);
             areadogrupo = v.findViewById(R.id.areadogrupo);
             edit = v.findViewById(R.id.edit);
             excluir= v.findViewById(R.id.excluir);

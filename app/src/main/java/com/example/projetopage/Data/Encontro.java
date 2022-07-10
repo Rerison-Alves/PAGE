@@ -89,4 +89,22 @@ public class Encontro {
             }
         });
     }
+
+    @Override
+    public int hashCode() {
+        return getIdEncontro().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof Encontro)) {
+            return false;
+        }
+        Encontro encontro = (Encontro) o;
+        return this.getIdEncontro().equals(encontro.getIdEncontro());
+    }
+
+
 }

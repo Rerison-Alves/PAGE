@@ -1,5 +1,9 @@
 package com.example.projetopage.adapters;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +26,7 @@ import com.example.projetopage.R;
 import com.example.projetopage.util.UsuarioAutenticado;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -83,17 +88,17 @@ public class BottomSheetCriarGrupo extends BottomSheetDialogFragment {
         });
 
         inicializarfirebase();
-        myRef.child("Event").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                nconvidados.setText(PopupDialogConvidaUsuario.convidados.size() + "/50");
-            }
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("atualizar_campos")) {
+                    nconvidados.setText(PopupDialogConvidaUsuario.convidados.size() + "/50");
+                }
             }
-        });
+        };
+        getContext().registerReceiver(broadcastReceiver, new IntentFilter("atualizar_campos"));
         return view;
     }
 

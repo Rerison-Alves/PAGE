@@ -11,10 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.projetopage.Data.Encontro;
 import com.example.projetopage.Data.Grupo;
 import com.example.projetopage.Data.UsuarioAgrupamento;
 import com.example.projetopage.R;
+import com.example.projetopage.adapters.RecyclerViewAdapterEncontrosPrincipal;
 import com.example.projetopage.adapters.RecyclerViewAdapterRecentes;
 import com.example.projetopage.adapters.RecyclerViewAdapterExtended;
 import com.example.projetopage.util.UsuarioAutenticado;
@@ -27,6 +30,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class Principal extends Fragment {
 
@@ -61,12 +67,13 @@ public class Principal extends Fragment {
     }
     DatabaseReference myRef;
     String[] testeRecentes= new String[] {"POO em aplicativos", "POO 2022", "Prog. Linear", "Nome de grupo", "Tô sem ideia"};
-    String[] testeEncontros= new String[] {"Classe Swing", "Ui design"};
     ArrayList<Grupo> listaTodos = new ArrayList<Grupo>();
+    ArrayList<Encontro> ListadeEncontros= new ArrayList<Encontro>();
     Context context;
     RecyclerViewAdapterRecentes recyclerViewAdapterRecentes;
+    RecyclerViewAdapterEncontrosPrincipal recyclerViewAdapterEncontrosPrincipal;
     RecyclerViewAdapterExtended recyclerViewAdapterExtended;
-    private RecyclerView todosView;
+    private RecyclerView todosView, encontrosView, recentesView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,32 +81,100 @@ public class Principal extends Fragment {
         View view = inflater.inflate(R.layout.fragment_principal, container, false);
         inicializarfirebase();
         context= getContext();
-        //Grupos Recentes
-        RecyclerView recentesView = (RecyclerView) view.findViewById(R.id.gpsrecentes);
-        RecyclerView.LayoutManager recycleLayoutRecentes = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-        recentesView.setLayoutManager(recycleLayoutRecentes);
-        recyclerViewAdapterRecentes = new RecyclerViewAdapterRecentes(context, testeRecentes);
-        recentesView.setAdapter(recyclerViewAdapterRecentes);
-        //Próximos Encontros
-        RecyclerView encontrosView = (RecyclerView) view.findViewById(R.id.gpsencontros);
-        RecyclerView.LayoutManager recycleLayoutEncontros = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-        encontrosView.setLayoutManager(recycleLayoutEncontros);
-        recyclerViewAdapterRecentes = new RecyclerViewAdapterRecentes(context, testeEncontros);
-        encontrosView.setAdapter(recyclerViewAdapterRecentes);
         //Todos Grupos
         todosView = (RecyclerView) view.findViewById(R.id.gpstodosgrupos);
         todosView.setNestedScrollingEnabled( false );
         ConsultaTodos();
+        //Grupos Recentes
+        recentesView = (RecyclerView) view.findViewById(R.id.gpsrecentes);
+
+        //Próximos Encontros
+        encontrosView = (RecyclerView) view.findViewById(R.id.gpsencontros);
+        ConsultaEncontros();
         return view;
     }
 
-    private void listarTodos(RecyclerView todosView) {
-        RecyclerView.LayoutManager recycleLayoutTodos = new LinearLayoutManager(context);
-        todosView.setLayoutManager(recycleLayoutTodos);
-        recyclerViewAdapterExtended = new RecyclerViewAdapterExtended(context, getActivity().getSupportFragmentManager(), listaTodos);
-        todosView.setAdapter(recyclerViewAdapterExtended);
+    private void listarRecentes() {
+        RecyclerView.LayoutManager recycleLayoutRecentes = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        recentesView.setLayoutManager(recycleLayoutRecentes);
+        recyclerViewAdapterRecentes = new RecyclerViewAdapterRecentes(context, getActivity().getSupportFragmentManager(), listaTodos);
+        recentesView.setAdapter(recyclerViewAdapterRecentes);
     }
 
+    private void listarTodos(RecyclerView recyclerView) {
+        RecyclerView.LayoutManager recycleLayoutTodos = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(recycleLayoutTodos);
+        recyclerViewAdapterExtended = new RecyclerViewAdapterExtended(context, getActivity().getSupportFragmentManager(), listaTodos);
+        recyclerView.setAdapter(recyclerViewAdapterExtended);
+    }
+
+    private void listarEncontros(RecyclerView recyclerView) {
+        RecyclerView.LayoutManager recycleLayoutEncontros = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(recycleLayoutEncontros);
+        Set<Encontro> set = new HashSet<>(ListadeEncontros);
+        ListadeEncontros.clear();
+        ListadeEncontros.addAll(set);
+        recyclerViewAdapterEncontrosPrincipal = new RecyclerViewAdapterEncontrosPrincipal(context, getActivity().getSupportFragmentManager(), ListadeEncontros);
+        recyclerView.setAdapter(recyclerViewAdapterEncontrosPrincipal);
+    }
+
+    private void ConsultaEncontros(){
+        Query query = myRef.child("Agrupamentos").orderByChild("nome");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Grupo> todos = new ArrayList<Grupo>();
+                for(DataSnapshot objsnapshot:snapshot.getChildren()){
+                    Grupo grupo = objsnapshot.getValue(Grupo.class);
+                    Query query = myRef.child("UsuarioAgrupamento");
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot objsnapshot:snapshot.getChildren()){
+                                UsuarioAgrupamento usuarioAgrupamento = objsnapshot.getValue(UsuarioAgrupamento.class);
+                                if(usuarioAgrupamento.getIdUsuario().equals(UsuarioAutenticado.UsuarioLogado().getUid())){
+                                    if(grupo.getIdAgrupamento().equals(usuarioAgrupamento.getIdAgrupmaneto())){
+                                        todos.add(grupo);
+                                    }
+                                }
+                            }
+                            for (Grupo grupoi:todos){
+                                Query queryListadeEncontros= myRef.child("Agrupamentos").child(String.valueOf(grupoi.getIdAgrupamento())).child("Encontros").orderByChild("tema");
+                                queryListadeEncontros.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        for(DataSnapshot objsnapshot:snapshot.getChildren()){
+                                            Encontro encontro = objsnapshot.getValue(Encontro.class);
+                                            ListadeEncontros.add(encontro);
+                                        }
+                                        Set<Encontro> set = new LinkedHashSet<Encontro>(ListadeEncontros);
+                                        ListadeEncontros.clear();
+                                        ListadeEncontros.addAll(set);
+                                        listarEncontros(encontrosView);
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private void ConsultaTodos() {
         Query query = myRef.child("Agrupamentos").orderByChild("nome");
         query.addValueEventListener(new ValueEventListener() {
@@ -122,6 +197,7 @@ public class Principal extends Fragment {
                                 }
                             }
                             listarTodos(todosView);
+                            listarRecentes();
                         }
 
                         @Override
@@ -145,4 +221,5 @@ public class Principal extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
     }
+
 }

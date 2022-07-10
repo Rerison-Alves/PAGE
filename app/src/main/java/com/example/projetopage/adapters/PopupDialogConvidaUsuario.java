@@ -2,8 +2,11 @@ package com.example.projetopage.adapters;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,22 +71,22 @@ public class PopupDialogConvidaUsuario extends DialogFragment {
         recyclerViewAdapterUsuariosTodos = new RecyclerViewAdapterUsuariosTodos(context, todos);
         setRecyclerUsuarios(recyclerViewAdapterUsuariosTodos, ListaTodos, context);
 
-        myRef.child("Event").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                recyclerViewAdapterUsuariosTodos = new RecyclerViewAdapterUsuariosTodos(context, todos);
-                setRecyclerUsuarios(recyclerViewAdapterUsuariosTodos, ListaTodos, context);
-
-                recyclerViewAdapterUsuariosConvidados = new RecyclerViewAdapterUsuariosConvidados(context, convidados);
-                setRecyclerUsuarios(recyclerViewAdapterUsuariosConvidados, ListaConvidados, context);
-                nconvidados.setText(convidados.size() + "/50");
-            }
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("atualizar_campos")) {
+                    recyclerViewAdapterUsuariosTodos = new RecyclerViewAdapterUsuariosTodos(context, todos);
+                    setRecyclerUsuarios(recyclerViewAdapterUsuariosTodos, ListaTodos, context);
 
+                    recyclerViewAdapterUsuariosConvidados = new RecyclerViewAdapterUsuariosConvidados(context, convidados);
+                    setRecyclerUsuarios(recyclerViewAdapterUsuariosConvidados, ListaConvidados, context);
+                    nconvidados.setText(convidados.size() + "/50");
+                }
             }
-        });
+        };
+        getContext().registerReceiver(broadcastReceiver, new IntentFilter("atualizar_campos"));
         return builder.create();
     }
 

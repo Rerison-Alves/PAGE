@@ -52,6 +52,7 @@
     <string name="data_de_nascimento">Data de Nascimento*:</string>
     <string name="digite_a_senha_novamente">Digite a senha novamente*:</string>
     <string name="digite_uma_mensagem">Digite uma mensagem...</string>
+    <string name="configura_es">Configurações</string>
     <string-array name="cursos">
         <item>Indefinido</item>
         <item>Ciência da Computação</item>

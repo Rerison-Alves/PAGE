@@ -8,11 +8,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetoPAGE">
-
-        <activity
-            android:name=".AbaPrincipal" />
-        <activity
-            android:name=".MainActivity">
+        <activity android:name=".Config"></activity>
+        <activity android:name=".AbaPrincipal" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

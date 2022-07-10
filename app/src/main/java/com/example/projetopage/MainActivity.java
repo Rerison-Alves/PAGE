@@ -15,10 +15,12 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.example.projetopage.Data.Agendamento;
 import com.example.projetopage.Data.Agrupamento;
 import com.example.projetopage.Data.Encontro;
 import com.example.projetopage.Data.Grupo;
 import com.example.projetopage.Data.UsuarioAgrupamento;
+import com.example.projetopage.adapters.BottomSheetAlterarSenha;
 import com.example.projetopage.adapters.BottomSheetCadastro;
 import com.example.projetopage.adapters.BottomSheetCadastroAluno;
 import com.example.projetopage.adapters.BottomSheetCriarEncontro;
@@ -123,6 +125,10 @@ public class MainActivity extends AppCompatActivity {
         popupDialogConvidaUsuario.show(fragmentManager, "TAG");
     }
 
+    static public void alterasenha(FragmentManager fragmentManager){
+        BottomSheetAlterarSenha bottomSheetAlterarSenha = new BottomSheetAlterarSenha();
+        bottomSheetAlterarSenha.show(fragmentManager, "TAG");
+    }
     static public void consultaGrupoPerfil(Grupo grupo, Context context, FragmentManager fragmentManager){
         GrupoDialogPerfil dialog = new GrupoDialogPerfil(grupo, context, fragmentManager, R.style.Theme_ProjetoPAGE);
         dialog.show();
@@ -178,11 +184,31 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
     }
+
     static public void deletaEncontro(Encontro encontro, Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage("Ao fazer isso seu encontro será excluido permanentemente!").setTitle("Deseja excluir "+ encontro.getTema()+ "?");
         builder.setNegativeButton(R.string.sim, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference();
+                Query query = myRef.child("Agendamentos");
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot objsnapshot:snapshot.getChildren()) {
+                            Agendamento agendamento = objsnapshot.getValue(Agendamento.class);
+                            if(agendamento.getIdAgendamento().equals(encontro.getIdEncontro())){
+                                agendamento.remove();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 encontro.remove();
             }
         });

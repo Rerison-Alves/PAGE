@@ -114,6 +114,7 @@
                     android:textSize="18sp" />
             </FrameLayout>
             <FrameLayout
+                android:id="@+id/esqueciasenha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"

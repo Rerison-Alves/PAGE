@@ -1,6 +1,7 @@
 package com.example.projetopage.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,8 @@ public class RecyclerViewAdapterUsuariosTodos extends RecyclerView.Adapter<Recyc
                 PopupDialogConvidaUsuario.todos.remove(alunos[position]);
                 PopupDialogConvidaUsuario.convidados.add(alunos[position]);
                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                mDatabase.child("Event").setValue(Math.random());
+                Intent intent = new Intent("atualizar_campos");
+                context.sendBroadcast(intent);
             }
         });
 
