@@ -73,7 +73,7 @@ public class BottomSheetCadastroAluno extends BottomSheetDialogFragment {
                     @SuppressLint("SimpleDateFormat") SimpleDateFormat formata = new SimpleDateFormat("dd/MM/yyyy");
                     Date data=null;
                     try {
-                        data=formata.parse(datanasc.getText().toString());
+                        data=formata.parse(String.valueOf(datanasc.getText()));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -107,13 +107,22 @@ public class BottomSheetCadastroAluno extends BottomSheetDialogFragment {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        dismiss();
-                                        MainActivity.loginaluno(getParentFragmentManager());
-                                        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                                        aluno.setIdUsuario(user.getUid());
-                                        mDatabase.child("Usuario").child(user.getUid()).setValue(aluno);
-                                        FirebaseAuth.getInstance().signOut();
-                                        Toast.makeText(getContext(), "Sua conta foi cadastrada!\nVerifique seu email!", Toast.LENGTH_LONG).show();
+                                        FirebaseAuth auth = FirebaseAuth.getInstance();
+                                        auth.signInWithEmailAndPassword(aluno.getEmail(), senha.getText().toString()).
+                                                addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                                        if (task.isSuccessful()){
+                                                            dismiss();
+                                                            MainActivity.loginaluno(getParentFragmentManager());
+                                                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                                            aluno.setIdUsuario(user.getUid());
+                                                            mDatabase.child("Usuario").child(user.getUid()).setValue(aluno);
+                                                            Toast.makeText(getContext(), "Sua conta foi cadastrada!", Toast.LENGTH_LONG).show();
+                                                            FirebaseAuth.getInstance().signOut();
+                                                        }
+                                                    }
+                                                });
                                     }
                                 }
                             });
