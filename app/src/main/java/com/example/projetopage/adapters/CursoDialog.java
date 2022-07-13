@@ -69,6 +69,7 @@ public class CursoDialog extends Dialog {
                     if(grupo.getCurso().equals(Curso)){
                         grupos.add(grupo);
                     }
+                    setGrupos();
                 }
             }
 
@@ -78,6 +79,9 @@ public class CursoDialog extends Dialog {
             }
         });
 
+    }
+
+    private void setGrupos() {
         RecyclerView.LayoutManager recycleLayoutTodos = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recycleLayoutTodos);
         recyclerViewAdapterExtended = new RecyclerViewAdapterExtended(context, fragmentManager, grupos);

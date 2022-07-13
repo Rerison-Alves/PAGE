@@ -89,11 +89,7 @@ public class RecyclerViewAdapterEncontros extends RecyclerView.Adapter<RecyclerV
                         Date datainicio=agendamento.getDataInicio(), datafim=agendamento.getDataFim();
                         String textodata = formatadata.format(datainicio)+" "+formatahorario.format(datainicio)+"h - "+formatahorario.format(datafim)+"h";
                         holder.data.setText(textodata);
-                        if(agendamento.getIdLocal().equals("Online")){
-                            holder.local.setText(agendamento.getIdLocal());
-                        }else {
-//                           Local.setText();
-                        }
+                        holder.local.setText(agendamento.getIdLocal());
                     }
                 }
             }
